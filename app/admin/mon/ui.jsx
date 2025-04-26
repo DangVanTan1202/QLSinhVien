@@ -24,7 +24,7 @@ export default function MonHocUI({
     maMonHoc: "",
     tenMonHoc: "",
     idGiangVien: "",
-    LopHoc_Id: "",
+    idLopHoc: "",
   });
   const [isEdit, setIsEdit] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -32,7 +32,7 @@ export default function MonHocUI({
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    const numericFields = ["idGiangVien", "LopHoc_Id"];
+    const numericFields = ["idGiangVien", "idLopHoc"];
     setFormData((prev) => ({
       ...prev,
       [name]: numericFields.includes(name) ? Number(value) : value,
@@ -50,7 +50,7 @@ export default function MonHocUI({
       maMonHoc: "",
       tenMonHoc: "",
       idGiangVien: "",
-      LopHoc_Id: "",
+      idLopHoc: "",
     });
     setIsEdit(false);
     setShowForm(false);
@@ -92,7 +92,7 @@ export default function MonHocUI({
                     maMonHoc: "",
                     tenMonHoc: "",
                     idGiangVien: "",
-                    LopHoc_Id: "",
+                    idLopHoc: "",
                   });
                 }}
               >
@@ -119,13 +119,13 @@ export default function MonHocUI({
                 <tbody>
                   {filteredData.map((mh) => {
                     const gv = giangViens.find((g) => g.id === mh.idGiangVien);
-                    const lh = lopHocs.find((l) => l.id === mh.LopHoc_Id);
+                    const lh = lopHocs.find((l) => l.id === mh.idLopHoc);
                     return (
                       <tr key={mh.id} className="hover:bg-green-100 transition">
                         <td className="p-3">{mh.maMonHoc}</td>
                         <td className="p-3">{mh.tenMonHoc}</td>
                         <td className="p-3">{gv?.maGiangVien || "N/A"}</td>
-                        <td className="p-3">{lh?.TenLop || "N/A"}</td>
+                        <td className="p-3">{lh?.tenLop || "N/A"}</td>
                         {(permissions.Sua || permissions.Xoa) && (
                           <td className="space-x-2">
                             {permissions.Sua && (
@@ -139,7 +139,7 @@ export default function MonHocUI({
                                     maMonHoc: mh.maMonHoc,
                                     tenMonHoc: mh.tenMonHoc,
                                     idGiangVien: mh.idGiangVien,
-                                    LopHoc_Id: mh.LopHoc_Id,
+                                    idLopHoc: mh.idLopHoc,
                                   });
                                 }}
                               >
@@ -207,15 +207,15 @@ export default function MonHocUI({
                     ))}
                   </select>
                   <select
-                    name="LopHoc_Id"
+                    name="idLopHoc"
                     className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-                    value={formData.LopHoc_Id}
+                    value={formData.idLopHoc}
                     onChange={handleInput}
                   >
                     <option value="">-- Chọn lớp học --</option>
                     {lopHocs.map((lh) => (
                       <option key={lh.id} value={lh.id}>
-                        {lh.TenLop}
+                        {lh.tenLop}
                       </option>
                     ))}
                   </select>

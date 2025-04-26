@@ -76,7 +76,7 @@ export const getDiemTheoLopVaMon = async (idLopHoc, idMonHoc) => {
         hoTen: d.SinhVien?.hoTen,
         maSinhVien: d.SinhVien?.maSinhVien,
         diem: d.diem,
-        IsDuyet: d.IsDuyet,
+        isDuyet: d.isDuyet,
       }));
       
     } catch (error) {
@@ -95,7 +95,7 @@ export const duyetBangDiem = async (dsDiem) => {
               "Content-Type": "application/json",
               Authorization: `Bearer ${getToken()}`,
             },
-            body: JSON.stringify({ IsDuyet: true }),
+            body: JSON.stringify({ isDuyet: true }),
           })
         )
       );
@@ -115,7 +115,7 @@ export const duyetBangDiem = async (dsDiem) => {
               "Content-Type": "application/json",
               Authorization: `Bearer ${getToken()}`,
             },
-            body: JSON.stringify({ IsDuyet: false }),
+            body: JSON.stringify({ isDuyet: false }),
           })
         )
       );

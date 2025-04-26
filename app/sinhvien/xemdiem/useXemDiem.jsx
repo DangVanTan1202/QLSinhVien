@@ -40,7 +40,7 @@ export function useXemDiem() {
     const loadPermissionsAndData = async () => {
       try {
         const quyenData = await new Promise((resolve) => {
-          fetchPhanQuyenByLoaiTK(2, resolve);
+          fetchPhanQuyenByLoaiTK(3, resolve);
         });
 
         const chucNangsData = await new Promise((resolve) => {

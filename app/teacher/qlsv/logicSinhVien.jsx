@@ -52,7 +52,7 @@ export default function useSinhVienLogic() {
       await fetchLopHocs(setLopHocs);
 
       const quyenData = await new Promise((resolve) => {
-        fetchPhanQuyenByLoaiTK(1, resolve); // 👈 ID loại tài khoản Admin
+        fetchPhanQuyenByLoaiTK(1, resolve); //  ID loại tài khoản Admin
       });
 
       const chucNangsData = await new Promise((resolve) => {

@@ -51,7 +51,7 @@ export default function useThongBaoLogic() {
 
         if (parsedUser.LoaiTK_Code === "GV") {
           const res = await fetch(
-            `http://localhost:61154/odata/GiangViens?$filter=user_id eq ${parsedUser.Id}`,
+            `http://guyqn123-001-site1.ptempurl.com/api/odata/GiangViens?$filter=user_id eq ${parsedUser.Id}`,
             {
               headers: {
                 Authorization: `Bearer ${getToken()}`,
@@ -91,7 +91,7 @@ export default function useThongBaoLogic() {
 
     setSelectedMonHoc(monHoc);
 
-    const lopId = monHoc?.LopHoc_Id;
+    const lopId = monHoc?.idLopHoc;
     if (!lopId) return;
 
     try {
@@ -105,10 +105,9 @@ export default function useThongBaoLogic() {
         return {
           ...sv,
           diem: diem?.diem ?? null,
-          IsDuyet: diem?.IsDuyet ?? null,
+          isDuyet: diem?.isDuyet ?? null,
         };
       });
-
       setSinhViens(mergedData);
       setDiemList(diemList);
     } catch (err) {
@@ -119,7 +118,7 @@ export default function useThongBaoLogic() {
   const handleNhapLai = async () => {
     if (!selectedMonHoc) return;
 
-    const idLopHoc = selectedMonHoc?.LopHoc_Id;
+    const idLopHoc = selectedMonHoc?.idLopHoc;
     const idMonHoc = selectedMonHoc?.id;
 
     if (!idLopHoc || !idMonHoc) {

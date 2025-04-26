@@ -65,7 +65,7 @@ export default function NopDiemUI({
                 <option value="">-- Chọn môn học --</option>
                 {monHocs.map((mh) => (
                   <option key={mh.id} value={mh.id}>
-                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.TenLop})
+                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.tenLop})
                   </option>
                 ))}
               </select>
@@ -74,7 +74,7 @@ export default function NopDiemUI({
               <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-200">
                 <h3 className="text-xl font-semibold mb-4">
                   Danh sách sinh viên lớp
-                   {monHocs.find(m => m.id == selectedMonHoc)?.LopHoc?.TenLop}
+                   {monHocs.find(m => m.id == selectedMonHoc)?.LopHoc?.tenLop}
                 </h3>
                 <table className="w-full text-left border border-gray-200">
                   <thead>

@@ -107,7 +107,7 @@ export const submitDiem = async ({ idSinhVien, idMonHoc, diem, idGiangVien }) =>
           idMonHoc,
           diem,
           idGiangVien,
-          IsDuyet: null, 
+          isDuyet: null, 
         }),
       });
   
@@ -139,24 +139,16 @@ export const fetchChucNangs = async (setChucNangs) => {
 };
 // Lấy danh sách phân quyền theo loại tài khoản
 export const fetchPhanQuyenByLoaiTK = async (idLoaiTK, setPhanQuyenList) => {
-    if (!idLoaiTK) {
-      console.warn("ID loại tài khoản không hợp lệ:", idLoaiTK);
-      setPhanQuyenList([]); // reset nếu cần
-      return;
-    }
-    try {
-      const res = await fetch(
-        `http://guyqn123-001-site1.ptempurl.com/api/odata/PhanQuyenLoaiTks?$filter=IdLoaiTK eq ${idLoaiTK}`,
-        {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        }
-      );
-      const data = await res.json();
-      setPhanQuyenList(data.value || []);
-    } catch (error) {
-      console.error("Lỗi fetch phân quyền:", error);
-    }
-  };
+  try {
+    const res = await fetch(`${API_BASE}/PhanQuyenLoaiTks?$filter=IdLoaiTK eq ${idLoaiTK}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+    const data = await res.json();
+    setPhanQuyenList(data.value || []);
+  } catch (error) {
+    console.error("Lỗi fetch phân quyền:", error);
+  }
+};
   

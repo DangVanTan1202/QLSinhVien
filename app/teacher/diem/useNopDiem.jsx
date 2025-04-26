@@ -69,7 +69,7 @@ export const useNopDiem = () => {
       setMonHocs(monHocData);
 
       const quyenData = await new Promise((resolve) =>
-        fetchPhanQuyenByLoaiTK(1, resolve)
+        fetchPhanQuyenByLoaiTK(2, resolve)
       );
       const chucNangData = await new Promise((resolve) =>
         fetchChucNangs(resolve)
@@ -77,7 +77,7 @@ export const useNopDiem = () => {
       const chucNangNopDiem = chucNangData.find((c) => c.code === "QLDS");
       const quyenNopDiem = quyenData.find(
         (q) => q.IdChucNang === chucNangNopDiem?.id
-      );
+      )
       setPermissions({
         Xem: quyenNopDiem?.Xem,
         Nop: quyenNopDiem?.Nop,

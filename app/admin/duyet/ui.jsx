@@ -15,20 +15,18 @@ export default function DuyetDiemUI({
   onTuChoi,
 }) {
   const [selectedMonHoc, setSelectedMonHoc] = useState(null);
-
   const handleSelectMonHoc = (monHoc) => {
     setSelectedMonHoc(monHoc);
     onMonHocChange(monHoc.id);
   };
-
   const handleBack = () => {
     setSelectedMonHoc(null);
   };
-
-  const trangThaiBangDiem = sinhViens[0]?.IsDuyet;
-
+  const trangThaiBangDiem = sinhViens.length > 0 && ("isDuyet" in sinhViens[0]) 
+  ? (sinhViens[0].isDuyet ?? null)
+  : null;
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-yellow-100 via-pink-200 to-purple-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
@@ -58,7 +56,7 @@ export default function DuyetDiemUI({
                       <tr key={mh.id} className="hover:bg-green-100">
                         <td className="p-3">{mh.maMonHoc}</td>
                         <td className="p-3">{mh.tenMonHoc}</td>
-                        <td className="p-3">{mh.LopHoc?.TenLop}</td>
+                        <td className="p-3">{mh.LopHoc?.tenLop}</td>
                         <td className="p-3">{mh.GiangVien?.maGiangVien}</td>
                         <td className="p-3 text-center w-20">
                           <button
@@ -77,7 +75,7 @@ export default function DuyetDiemUI({
               <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-200">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-xl font-semibold">
-                    Danh sách sinh viên lớp {selectedMonHoc.LopHoc?.TenLop}
+                    Danh sách sinh viên lớp {selectedMonHoc.LopHoc?.tenLop}
                   </h3>
                   <button
                     
@@ -103,9 +101,9 @@ export default function DuyetDiemUI({
                         <td className="p-3">{sv.maSinhVien}</td>
                         <td className="p-3">{sv.diem ?? "Chưa có"}</td>
                         <td className="p-3">
-                          {sv?.IsDuyet === true
+                          {sv?.isDuyet === true
                             ? "Đã duyệt"
-                            : sv?.IsDuyet === false
+                            : sv?.isDuyet === false
                             ? "Bị từ chối"
                             : "Chờ duyệt"}
                         </td>

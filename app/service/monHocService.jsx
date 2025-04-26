@@ -87,7 +87,7 @@ export const addMonHoc = async (data) => {
       maMonHoc: data.maMonHoc,
       tenMonHoc: data.tenMonHoc,
       idGiangVien: Number(data.idGiangVien),
-      LopHoc_Id: Number(data.LopHoc_Id),
+      idLopHoc: Number(data.idLopHoc),
     };
 
     console.log("Payload gửi đi:", payload); // debug trước khi gửi
@@ -122,7 +122,7 @@ export const updateMonHoc = async (id, data) => {
       maMonHoc: data.maMonHoc,
       tenMonHoc: data.tenMonHoc,
       idGiangVien: Number(data.idGiangVien),
-      LopHoc_Id: Number(data.LopHoc_Id),
+      idLopHoc: Number(data.idLopHoc),
     };
 
     console.log("Payload gửi đi:", payload); // debug trước khi gửi

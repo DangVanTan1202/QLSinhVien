@@ -24,7 +24,7 @@ export default function ThongBaoUI({
       onMonHocChange(mon.id);
     }
   };
-  const isBangDiemTuChoi = sinhViens?.some((sv) => sv.IsDuyet === false);
+  const isBangDiemTuChoi = sinhViens?.some((sv) => sv.isDuyet === false);
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-100">
       <Sidebar user={user} />
@@ -44,7 +44,7 @@ export default function ThongBaoUI({
                 <option value="">-- Chọn môn học --</option>
                 {monHocs.map((mh) => (
                   <option key={mh.id} value={mh.id}>
-                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.TenLop}) - GV:{" "}
+                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.tenLop}) - GV:{" "}
                     {mh.GiangVien?.hoTen}
                   </option>
                 ))}
@@ -55,7 +55,7 @@ export default function ThongBaoUI({
               <div className="bg-white p-6 rounded-xl shadow-md border">
                 <h3 className="text-xl font-semibold mb-4 text-gray-700">
                   Danh sách sinh viên lớp 
-                  {monHocs.find((m) => m.id == selectedMonHoc)?.LopHoc?.TenLop}
+                  {monHocs.find((m) => m.id == selectedMonHoc)?.LopHoc?.tenLop}
                 </h3>
                 <table className="w-full border border-gray-300 text-left">
                   <thead className="bg-orange-100">
@@ -73,11 +73,11 @@ export default function ThongBaoUI({
                         <td className="p-3">{sv.maSinhVien}</td>
                         <td className="p-3">{sv.diem ?? "Chưa có"}</td>
                         <td className="p-3">
-                          {sv.IsDuyet === true
-                            ? "✅ Đã duyệt"
-                            : sv.IsDuyet === false
-                            ? "❌ Bị từ chối"
-                            : "⏳ Chờ duyệt"}
+                          {sv.isDuyet === true
+                            ? " Đã duyệt"
+                            : sv.isDuyet === false
+                            ? " Bị từ chối"
+                            : "Chờ duyệt"}
                         </td>
                       </tr>
                     ))}

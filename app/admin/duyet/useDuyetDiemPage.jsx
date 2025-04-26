@@ -84,7 +84,7 @@ export function useDuyetDiemPage() {
       return {
         ...sv,
         diem: diem?.diem ?? null,
-        IsDuyet: diem?.IsDuyet ?? null,
+        isDuyet: diem?.isDuyet ?? null,
       };
     });
 
@@ -96,15 +96,16 @@ export function useDuyetDiemPage() {
     if (!selectedMonHoc || diemList.length === 0) return;
     await duyetBangDiem(diemList);
     alert("Bảng điểm đã được duyệt.");
-    handleMonHocChange(selectedMonHoc);
+    await handleMonHocChange(selectedMonHoc); // Thêm await ở đây
   };
-
+  
   const handleTuChoi = async () => {
     if (!selectedMonHoc || diemList.length === 0) return;
     await tuChoiBangDiem(diemList);
     alert("Bảng điểm đã bị từ chối.");
-    handleMonHocChange(selectedMonHoc);
+    await handleMonHocChange(selectedMonHoc); // Thêm await ở đây
   };
+  
 
   return {
     user,
