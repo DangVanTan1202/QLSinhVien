@@ -40,7 +40,7 @@ export function useXemDiem() {
     const loadPermissionsAndData = async () => {
       try {
         const quyenData = await new Promise((resolve) => {
-          fetchPhanQuyenByLoaiTK(3, resolve);
+          fetchPhanQuyenByLoaiTK(parsedUser?.LoaiTK_Id, resolve);
         });
 
         const chucNangsData = await new Promise((resolve) => {
@@ -69,7 +69,7 @@ export function useXemDiem() {
                   const userGV = await fetchUserById(giangVienUserId);
                   tenGiangVien = userGV?.hoTen || "N/A";
                 } catch (error) {
-                  console.error("❌ Lỗi khi lấy thông tin giảng viên:", error);
+                  console.error("Lỗi khi lấy thông tin giảng viên:", error);
                 }
               }
 

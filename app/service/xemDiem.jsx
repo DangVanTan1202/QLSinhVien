@@ -57,7 +57,7 @@ export const fetchDiemBySinhVienId = async (idSinhVien) => {
         throw new Error("idSinhVien không hợp lệ!");
       }
       const res = await fetch(
-        `${API_BASE}/DiemSoes?$expand=MonHoc,GiangVien&$filter=idSinhVien eq ${idSinhVien} and IsDuyet eq true`,
+        `${API_BASE}/DiemSoes?$expand=MonHoc,GiangVien&$filter=idSinhVien eq ${idSinhVien} and isDuyet eq true`,
         {
           headers: {
             Authorization: `Bearer ${getToken()}`,
