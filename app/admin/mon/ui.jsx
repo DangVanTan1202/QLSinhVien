@@ -65,18 +65,18 @@ export default function MonHocUI({
   });
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-yellow-50 via-pink-100 to-purple-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
         <h2 className="text-4xl font-bold text-orange-600 mb-8">Quản lý môn học</h2>
 
-        <div className="p-6 space-y-6 bg-white rounded-xl shadow-lg border border-purple-200">
+        <div className="p-6 space-y-6 bg-neutral-200 rounded-xl shadow-lg border border-purple-200">
           {/* Tìm kiếm + Thêm */}
           <div className="flex justify-between items-center mb-4">
             <input
               type="text"
-              placeholder="🔍 Tìm kiếm môn học..."
+              placeholder=" Tìm kiếm môn học..."
               className="input input-bordered w-full max-w-md border-pink-400 focus:ring-2 focus:ring-pink-400"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -106,7 +106,7 @@ export default function MonHocUI({
             <div className="overflow-auto">
               <table className="w-full bg-white shadow rounded overflow-hidden">
                 <thead className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white">
-                  <tr className="bg-orange-100 text-red-700">
+                  <tr className="bg-pink-200 text-stone-700">
                     <th className="p-3 text-left">Mã MH</th>
                     <th className="p-3 text-left">Tên môn học</th>
                     <th className="p-3 text-left">Giảng viên</th>

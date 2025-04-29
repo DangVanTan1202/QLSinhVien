@@ -51,7 +51,7 @@ export default function AccountUI({
   //  Lọc loại tài khoản để dùng trong select
   const filteredLoaiTaiKhoans = loaiTaiKhoans.filter((l) => l.ten !== "Admin");
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
@@ -62,7 +62,7 @@ export default function AccountUI({
           <div className="flex justify-between items-center mb-4">
             <input
               type="text"
-              placeholder="🔍 Tìm kiếm tài khoản..."
+              placeholder=" Tìm kiếm tài khoản..."
               className="input input-bordered w-full max-w-md"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -85,7 +85,7 @@ export default function AccountUI({
           {permissions.Xem ? (
             <div className="overflow-auto">
               <table className="w-full bg-white shadow rounded">
-                <thead className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white">
+                <thead className="bg-pink-200 text-stone-700">
                   <tr>
                     <th className="p-3 text-left">Tên đăng nhập</th>
                     <th className="p-3 text-left">Họ tên</th>

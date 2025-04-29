@@ -26,7 +26,7 @@ export default function ThongBaoUI({
   };
   const isBangDiemTuChoi = sinhViens?.some((sv) => sv.isDuyet === false);
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-100">
+    <div className="flex min-h-screen bg-neutral-200">
       <Sidebar user={user} />
       <div className="flex-1 p-6">
         <Header user={user}  onLogout={handleLogout} />
@@ -58,7 +58,7 @@ export default function ThongBaoUI({
                   {monHocs.find((m) => m.id == selectedMonHoc)?.LopHoc?.tenLop}
                 </h3>
                 <table className="w-full border border-gray-300 text-left">
-                  <thead className="bg-orange-100">
+                  <thead className="bg-pink-200 text-stone-700">
                     <tr>
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>

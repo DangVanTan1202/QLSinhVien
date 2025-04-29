@@ -7,7 +7,7 @@ export default function Header({ user, onLogout }) {
   const router = useRouter();
   const hasUser = user && Object.keys(user).length > 0;
   return (
-    <header className="flex justify-between items-center bg-red-800 p-4 shadow-md rounded-lg text-white">
+    <header className="flex justify-between items-center bg-cyan-500 p-4 shadow-md rounded-lg text-white">
       {hasUser ? (
         <div className="flex items-center gap-4">
           <div className="w-16 h-16">

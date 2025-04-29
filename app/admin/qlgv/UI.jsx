@@ -72,7 +72,7 @@ export default function GiangVienUI({
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
@@ -114,7 +114,7 @@ export default function GiangVienUI({
             <div className="overflow-auto">
               <table className="w-full bg-white shadow rounded overflow-hidden">
                 <thead className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white">
-                  <tr className="bg-orange-100 text-red-700">
+                  <tr className="bg-pink-200 text-stone-700">
                     <th className="p-3 text-left"> Mã GV</th>
                     <th className="p-3 text-left">Họ tên</th>
                     <th className="p-3 text-left">Ngày sinh</th>

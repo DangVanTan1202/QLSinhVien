@@ -9,8 +9,8 @@ export default function Client() {
   const {
     user,
     handleLogout,
-    oldPassword,
-    newPassword,
+    MatKhauCu,
+    MatKhauMoi,
   
     confirmPassword,
     showOld,
@@ -33,8 +33,8 @@ export default function Client() {
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
         <ChangePasswordUI
-          oldPassword={oldPassword}
-          newPassword={newPassword}
+          oldPassword={MatKhauCu}
+          newPassword={MatKhauMoi}
           confirmPassword={confirmPassword}
           showOld={showOld}
           showNew={showNew}

@@ -13,7 +13,6 @@ export default function Client() {
     handleDelete,
     handleSubmitSuccess,
   } = useAccountPage();
-
   return (
     <AccountUI
       user={user}

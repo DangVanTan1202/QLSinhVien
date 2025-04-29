@@ -108,18 +108,17 @@ export const useNopDiem = () => {
     }
 
     if (successCount > 0) {
-      alert(`✅ Đã nộp điểm cho ${successCount} sinh viên.`);
+      alert(`Đã nộp điểm cho ${successCount} sinh viên.`);
     }
 
     if (errorMessages.length > 0) {
       alert(
-        `⚠️ Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join(
+        ` Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join(
           "\n"
         )}`
       );
     }
   };
-
   return {
     user,
     monHocs,

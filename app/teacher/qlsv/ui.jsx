@@ -75,7 +75,7 @@ export default function SinhVienUI({
           Quản lý sinh viên
         </h2>
 
-        <div className="p-6 space-y-6 bg-white rounded-xl shadow-lg border border-purple-200">
+        <div className="p-6 space-y-6 bg-neutral-200 rounded-xl shadow-lg border border-purple-200">
           {/* Tìm kiếm + Thêm */}
           <div className="flex justify-between items-center mb-4">
             <input
@@ -109,8 +109,8 @@ export default function SinhVienUI({
           {permissions.Xem ? (
             <div className="overflow-auto">
               <table className="w-full bg-white shadow rounded overflow-hidden">
-                <thead className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white">
-                  <tr className="bg-orange-100 text-red-700">
+                <thead className="bg-neutral-200">
+                  <tr className="bg-pink-200 text-stone-700">
                     <th className="p-3 text-left">Mã SV</th>
                     <th className="p-3 text-left">Họ tên</th>
                     <th className="p-3 text-left">Ngày sinh</th>

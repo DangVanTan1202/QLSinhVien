@@ -42,7 +42,7 @@ export default function Sidebar({ user }) {
 
   return (
     <aside
-      className={`relative bg-gray-900 text-white p-6 flex flex-col min-h-screen transition-all duration-300 
+      className={`relative bg-gray-800 text-rose-500 p-6 flex flex-col min-h-screen transition-all duration-300 
       ${isCollapsed ? "w-22" : "w-64"}`}
     >
       {/* Nút Toggle Sidebar*/}
@@ -63,7 +63,7 @@ export default function Sidebar({ user }) {
           <Button
             key={item.path}
             variant="ghost"
-            className={`w-full flex items-center gap-3 text-left text-white hover:bg-red-800 
+            className={`w-full flex items-center gap-3 text-left text-white hover:bg-orange-500 
               transition-all duration-200 ${isCollapsed ? "justify-center px-0" : "px-3"}`}
             onClick={() => router.push(item.path)}
           >

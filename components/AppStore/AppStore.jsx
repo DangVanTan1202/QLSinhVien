@@ -63,5 +63,4 @@ const AppStore = () => {
     </div>
   );
 };
-
 export default AppStore;

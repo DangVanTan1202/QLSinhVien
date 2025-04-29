@@ -2,8 +2,8 @@
 import { Eye, EyeOff } from "lucide-react";
 
 export default function ChangePasswordUI({
-  oldPassword,
-  newPassword,
+  MatKhauCu,
+  MatKhauMoi,
   confirmPassword,
   showOld,
   showNew,
@@ -20,17 +20,15 @@ export default function ChangePasswordUI({
   success,
 }) {
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-purple-200 via-pink-100 to-blue-200 px-4">
+    <div className="flex justify-center items-center h-screen bg-neutral-200 px-4">
       <div className="w-full max-w-md p-8 bg-white/80 backdrop-blur-lg shadow-2xl rounded-2xl relative border border-pink-300">
         <h2 className="text-3xl font-bold text-center mb-6 text-pink-600">
            Đổi Mật Khẩu
         </h2>
-
         {error && <p className="text-red-600 text-sm mb-3 text-center">{error}</p>}
         {success && (
           <p className="text-green-600 text-sm mb-3 text-center">{success}</p>
         )}
-
         <form onSubmit={handleSubmit}>
           {/* OLD PASSWORD */}
           <div className="mb-4 relative">
@@ -39,7 +37,7 @@ export default function ChangePasswordUI({
             </label>
             <input
               type={showOld ? "text" : "password"}
-              value={oldPassword}
+              value={MatKhauCu}
               onChange={(e) => setOldPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all"
               required
@@ -51,7 +49,6 @@ export default function ChangePasswordUI({
               {showOld ? <EyeOff size={20} /> : <Eye size={20} />}
             </div>
           </div>
-
           {/* NEW PASSWORD */}
           <div className="mb-4 relative">
             <label className="block text-sm font-semibold text-gray-700 mb-1">
@@ -59,7 +56,7 @@ export default function ChangePasswordUI({
             </label>
             <input
               type={showNew ? "text" : "password"}
-              value={newPassword}
+              value={MatKhauMoi}
               onChange={(e) => setNewPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all"
               required
@@ -91,7 +88,6 @@ export default function ChangePasswordUI({
               {showConfirm ? <EyeOff size={20} /> : <Eye size={20} />}
             </div>
           </div>
-
           <button
             type="submit"
             className="w-full py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-all shadow-md"
@@ -99,7 +95,6 @@ export default function ChangePasswordUI({
             Đổi Mật Khẩu
           </button>
         </form>
-
         <button
           onClick={() => router.back()}
           className="w-full py-2 mt-4 text-sm text-gray-600 underline hover:text-gray-900 text-center"

@@ -64,7 +64,7 @@ export default function Register() {
   return (
     <div className="relative w-full h-screen flex flex-col items-center justify-center bg-gradient-to-b from-yellow-300 to-orange-500">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/daihoc.webp')" }}></div>
-      <header className="w-full bg-red-700 text-white shadow-md py-4 px-8 flex justify-between items-center fixed top-0 z-10">
+      <header className="w-full bg-cyan-500 text-white shadow-md py-4 px-8 flex justify-between items-center fixed top-0 z-10">
         <h1 className="text-2xl font-bold">Hệ Thống Quản Lý Sinh Viên</h1>
         <nav className="space-x-6">
           <Button variant="ghost" className="text-white" onClick={() => router.push("/homePage")}>Home</Button>
@@ -103,9 +103,6 @@ export default function Register() {
           <Button variant="outline" className="mt-2 w-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white" onClick={() => router.push("/login")}>Đăng Nhập</Button>
         </div>
       </motion.div>
-      <footer className="w-full bg-gray-900 text-white text-center py-4 fixed bottom-0">
-        &copy; 2025 Hệ Thống Quản Lý Sinh Viên - All Rights Reserved
-      </footer>
     </div>
   );
 }

@@ -26,7 +26,7 @@ export default function DuyetDiemUI({
   ? (sinhViens[0].isDuyet ?? null)
   : null;
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
@@ -42,7 +42,7 @@ export default function DuyetDiemUI({
                   Danh sách môn học
                 </h3>
                 <table className="w-full text-left border border-gray-300">
-                  <thead className="bg-orange-100 text-red-700">
+                  <thead className="bg-pink-200 text-stone-700">
                     <tr>
                       <th className="p-3">Mã môn học</th>
                       <th className="p-3">Tên môn học</th>
@@ -86,7 +86,7 @@ export default function DuyetDiemUI({
                   </button>
                 </div>
                 <table className="w-full text-left border border-gray-200">
-                  <thead className="bg-orange-100 text-red-700">
+                  <thead className="bg-pink-200 text-stone-700">
                     <tr>
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>

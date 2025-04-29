@@ -21,7 +21,6 @@ export function useMonHocLogic() {
     Xem: false,
   });
   const router = useRouter();
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
@@ -35,21 +34,17 @@ export function useMonHocLogic() {
     }
     setUser(parsedUser);
   }, [router]);
-
   useEffect(() => {
     const loadData = async () => {
       await fetchMonHocsClient(setMonHocs);
       await fetchGiangViens(setGiangViens);
       await fetchLopHocs(setLopHocs);
-
       const quyenData = await new Promise((resolve) => {
         fetchPhanQuyenByLoaiTK(1, resolve); // 1 là loại tài khoản admin
       });
-
       const chucNangsData = await new Promise((resolve) => {
         fetchChucNangs(resolve);
       });
-
       const QLMonHocId = chucNangsData.find((c) => c.code === "QLMH")?.id;
       const quyenQLMonHoc = quyenData.find((q) => q.IdChucNang === QLMonHocId) || {};
 
@@ -63,12 +58,10 @@ export function useMonHocLogic() {
 
     loadData();
   }, []);
-
   const handleDelete = async (id) => {
     await deleteMonHoc(id);
     setMonHocs((prev) => prev.filter((mh) => mh.id !== id));
   };
-
   return {
     user,
     monHocs,

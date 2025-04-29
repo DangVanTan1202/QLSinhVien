@@ -9,19 +9,16 @@ import {
   fetchSinhVienByUserId,
   fetchUserById,
 } from "../../service/xemDiem";
-
 export function useXemDiem() {
   const [user, setUser] = useState(null);
   const [diemData, setDiemData] = useState([]);
   const [permissions, setPermissions] = useState({ Xem: false });
   const router = useRouter();
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     router.push("/login");
   };
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
@@ -72,7 +69,6 @@ export function useXemDiem() {
                   console.error("Lỗi khi lấy thông tin giảng viên:", error);
                 }
               }
-
               return {
                 maMonHoc: item.MonHoc?.maMonHoc || "N/A",
                 tenMonHoc: item.MonHoc?.tenMonHoc || "N/A",

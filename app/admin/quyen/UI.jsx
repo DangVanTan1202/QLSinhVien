@@ -52,7 +52,7 @@ export default function RoleUI({
     });
   };
   return (
-    <div className="flex min-h-screen bg-gray-50 text-gray-800 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-800 font-sans">
     <Sidebar user={user} />
     <div className="flex-1 px-8 py-6">
       <Header user={user} onLogout={handleLogout} />
@@ -84,7 +84,7 @@ export default function RoleUI({
           <>
             <table className="w-full text-sm border-separate border-spacing-y-2">
               <thead>
-                <tr className="bg-orange-100 text-orange-700 rounded-md">
+                <tr className="bg-pink-200 text-stone-700 rounded-md">
                   <th className="p-3 text-left">Chức năng</th>
                   {permissions.map((perm) => (
                     <th key={perm.key} className="p-3 text-center">{perm.label}</th>
@@ -113,7 +113,7 @@ export default function RoleUI({
                                 value: e.target.checked,
                               })
                             }
-                            className="w-5 h-5 accent-orange-500 cursor-pointer"
+                            className="w-5 h-5 accent-teal-300 cursor-pointer"
                           />
                         </td>
                       ))}

@@ -4,7 +4,6 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { X } from "lucide-react";
 import { useState } from "react";
-
 export default function XemDiemUI({ user, handleLogout, data, permissions }) {
   const [searchTerm, setSearchTerm] = useState("");
   const filteredData = (data || []).filter((item) => {
@@ -16,7 +15,7 @@ export default function XemDiemUI({ user, handleLogout, data, permissions }) {
     );
   });
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-yellow-50 via-pink-100 to-purple-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
@@ -37,7 +36,7 @@ export default function XemDiemUI({ user, handleLogout, data, permissions }) {
           {permissions.Xem ? (
             <div className="overflow-auto">
               <table className="w-full bg-white shadow rounded overflow-hidden">
-                <thead className="bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white">
+                <thead className="bg-pink-200 text-stone-700">
                   <tr className="text-white">
                     <th className="p-3 text-left">Mã môn học</th>
                     <th className="p-3 text-left">Tên môn học</th>

@@ -16,7 +16,7 @@ const Menu = [
 ];
 const Navbar = () => {
   return (
-    <div className="bg-gradient-to-r from-[#c30303] to-[#a40202] shadow-md text-white">
+    <div className="bg-gradient-to-r from-[#029aa2] to-[#036986] shadow-md text-white">
       <div className="container mx-auto py-2 px-4">
         <div className="flex justify-between items-center">
           {/* Logo section */}
@@ -56,7 +56,7 @@ const Navbar = () => {
               ))}
             </ul>
             <Link href="/login">
-              <button className="bg-blue-600 text-white flex items-center gap-2 px-4 py-2 rounded-xl">
+              <button className="bg-red-600 text-white flex items-center gap-2 px-4 py-2 rounded-xl">
                 Đăng nhập
                 <FaUserCircle
                   className="text-white"

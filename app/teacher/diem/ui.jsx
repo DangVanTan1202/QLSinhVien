@@ -22,7 +22,7 @@ export default function NopDiemUI({
     const mon = monHocs.find((m) => m.id == id);
     if (mon) {
       setSelectedLop(mon.LopHoc.id);
-      console.log("🔍 Lớp được chọn:", mon.LopHoc.id);
+      console.log(" Lớp được chọn:", mon.LopHoc.id);
       onLopChange(mon.LopHoc.id);
       setDsDiem([]);
     }
@@ -49,7 +49,7 @@ export default function NopDiemUI({
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-yellow-50 via-pink-100 to-purple-100 text-gray-900 font-sans">
+    <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
@@ -78,7 +78,7 @@ export default function NopDiemUI({
                 </h3>
                 <table className="w-full text-left border border-gray-200">
                   <thead>
-                    <tr className="bg-orange-100 text-red-700">
+                    <tr className="bg-pink-200 text-stone-700">
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>
                       <th className="p-3">Điểm</th>
