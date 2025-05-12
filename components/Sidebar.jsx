@@ -7,9 +7,9 @@ import { Home, Bell, Settings, Book, Users, BarChart2, ChevronLeft, ChevronRight
 
 export default function Sidebar({ user }) {
   const router = useRouter();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false); // Quản lý trạng thái của sidebar (đóng/mở)
   const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+    setIsCollapsed(!isCollapsed); // Đổi trạng thái của sidebar khi click vào nút toggle
   };
   const getMenuItems = () => {
     let items = [
@@ -72,7 +72,6 @@ export default function Sidebar({ user }) {
           </Button>
         ))}
       </nav>
-
       {/* Footer bên dưới Sidebar */}
       {!isCollapsed && (
         <div className="border-t border-gray-700 pt-4 mt-4 text-sm text-gray-400">

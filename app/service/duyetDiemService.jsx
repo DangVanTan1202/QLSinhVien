@@ -167,7 +167,6 @@ export const duyetBangDiem = async (dsDiem) => {
       throw error;
     }
   };
-  
 // Lấy danh sách chức năng
 export const fetchChucNangs = async (setChucNangs) => {
   try {

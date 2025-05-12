@@ -55,7 +55,6 @@ export function useMonHocLogic() {
         Xem: quyenQLMonHoc?.Xem,
       });
     };
-
     loadData();
   }, []);
   const handleDelete = async (id) => {

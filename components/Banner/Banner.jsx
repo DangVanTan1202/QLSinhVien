@@ -7,6 +7,7 @@ import { GiFoodTruck } from 'react-icons/gi';
 const Banner = () => {
   return (
     <>
+     {/* Điểm đánh dấu để cuộn đến phần "Giới thiệu" (About) */}
       <span id="about"></span>
       <div
         className="w-full"
@@ -14,8 +15,8 @@ const Banner = () => {
           backgroundImage: `url('/qlsv4.png')`, // dùng path ảnh trong public
           backgroundColor: '#270c03',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',   // Không lặp lại
+          backgroundSize: 'cover', // Ảnh nền phủ toàn bộ vùng chứa
         }}
       >
         <div className="min-h-screen flex justify-center items-center py-10">
@@ -28,11 +29,11 @@ const Banner = () => {
                   alt="biryani img"
                   width={430}
                   height={430}
-                  className="drop-shadow"
+                  className="drop-shadow" // Thêm đổ bóng cho ảnh
                 />
               </div>
 
-              {/* Text content section */}
+              {/* nội dung bên phải */}
               <div className="flex flex-col justify-center md:w-1/2 gap-4">
                 <h1 data-aos="fade-up" className="text-3xl md:text-4xl font-bold text-black">
                   Linh hoạt với các quyền
@@ -59,7 +60,7 @@ const Banner = () => {
                       <span>giảng viên</span>
                     </div>
                     <div
-                      data-aos="fade-up"
+                      data-aos="fade-up" // hiệu ứng hiện lên từ dưới
                       data-aos-delay="500"
                       className="flex items-center gap-3 text-green-500"
                     >
@@ -68,7 +69,7 @@ const Banner = () => {
                     </div>
                   </div>
                   <div
-                    data-aos="slide-left"
+                    data-aos="slide-left" // phần tử sẽ trượt từ phải sang trái 
                     className="md:w-1/2 border-l-4 border-orange-600 pl-6"
                   >
                     <h1 className="text-xl font-semibold text-blue-800">dễ dàng sử dụng</h1>

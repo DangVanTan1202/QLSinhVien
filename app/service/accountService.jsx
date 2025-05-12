@@ -5,7 +5,7 @@ export const getToken = () => {
   return localStorage.getItem("token") || "";
 };
 
-// 👉 Lấy danh sách tài khoản
+//  Lấy danh sách tài khoản
 export const fetchUsersClient = async (setUsers) => {
   try {
     const res = await fetch(`${API_BASE}/Users?$expand=LoaiTk`, {
@@ -20,7 +20,7 @@ export const fetchUsersClient = async (setUsers) => {
   }
 };
 
-// 👉 Lấy danh sách loại tài khoản
+//  Lấy danh sách loại tài khoản
 export const fetchLoaiTaiKhoans = async (setLoaiTaiKhoans) => {
   try {
     const res = await fetch(`${API_BASE}/LoaiTks`, {
@@ -35,7 +35,7 @@ export const fetchLoaiTaiKhoans = async (setLoaiTaiKhoans) => {
   }
 };
 
-// 👉 Thêm tài khoản mới
+//  Thêm tài khoản mới
 export const addUser = async (data) => {
   try {
     const payload = {
@@ -67,7 +67,7 @@ export const addUser = async (data) => {
   }
 };
 
-// 👉 Cập nhật tài khoản
+//  Cập nhật tài khoản
 export const updateUser = async (id, data) => {
   try {
     const payload = {
@@ -98,7 +98,7 @@ export const updateUser = async (id, data) => {
   }
 };
 
-// 👉 Xoá tài khoản
+//  Xoá tài khoản
 export const deleteUser = async (id) => {
   try {
     const res = await fetch(`${API_BASE}/Users(${id})`, {

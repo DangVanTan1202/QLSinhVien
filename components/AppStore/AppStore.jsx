@@ -4,14 +4,14 @@ import Image from "next/image";
 const AppStore = () => {
   return (
     <div
-      className="py-10 w-full bg-cover bg-center bg-no-repeat"
+      className="py-10 w-full bg-cover bg-center bg-no-repeat"//bg-cover: Ảnh phủ toàn bộ div,bg-center: Ảnh canh giữa,bg-no-repeat: Không lặp ảnh
       style={{ backgroundImage: `url('/qlsv5.png')` }}
     >
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col sm:flex-row items-center">
           {/* Text + App Store Buttons */}
           <div
-            data-aos="fade-up"
+            data-aos="fade-up" // hiện lên từ dưới
             data-aos-duration="300"
             className="w-full sm:w-1/2 text-center sm:text-left mb-6 sm:mb-0"
           >
@@ -54,8 +54,7 @@ const AppStore = () => {
               height="300"
               style={{ border: 0 }}
               allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              loading="lazy"//tải bản đồ khi cuộn tới (giúp tối ưu tốc độ)
             ></iframe>
           </div>
         </div>

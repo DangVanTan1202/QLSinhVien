@@ -8,7 +8,7 @@ const ServicesData = [
     name: 'admin',
     description:
       'Quản lý tài khoản , môn học , giảng viên và duyệt bảng điểm.',
-    aosDelay: '100',
+    aosDelay: '100',   // Thời gian trễ hiệu ứng AOS
   },
   {
     id: 2,
@@ -31,6 +31,7 @@ const ServicesData = [
 const Services = () => {
   return (
     <>
+       {/* Thẻ đánh dấu vị trí để cuộn tới section này */}
       <span id="services"></span>
       <div className="py-10 bg-sky-100">
         <div className="max-w-7xl mx-auto px-4">
@@ -41,24 +42,26 @@ const Services = () => {
 
           {/* Services Card section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+             {/* Lặp qua từng phần tử trong ServicesData để hiển thị thẻ */}
             {ServicesData.map((service) => (
               <div
-                key={service.id}
-                data-aos="fade-up"
-                data-aos-delay={service.aosDelay}
+                key={service.id}   // key giúp React định danh phần tử
+                data-aos="fade-up"  // Hiệu ứng cuộn hiện lên
+                data-aos-delay={service.aosDelay}  // Trễ hiệu ứng theo giá trị từ mảng
                 className="flex justify-center"
               >
+                 {/* Thẻ dịch vụ - có bo góc, đổ bóng, padding */}
                 <div className="bg-white shadow-lg rounded-xl w-full max-w-xs text-center p-6 relative overflow-hidden">
                   {/* Hình ảnh */}
                   <div className="flex justify-center -mt-10">
                     <Image
                       src={service.img}
-                      alt={service.name}
+                      alt={service.name}  // Alt hiển thị khi ảnh lỗi
                       width={400}
                       height={128}
                       className="object-contain transition-transform duration-300"
                       style={{
-                        transform: 'translateY(-20px)',
+                        transform: 'translateY(-20px)',   // Dịch chuyển ảnh lên trên một chút
                       }}
                     />
                   </div>

@@ -16,6 +16,7 @@ const Menu = [
 ];
 const Navbar = () => {
   return (
+     // Thanh navbar có gradient xanh và đổ bóng
     <div className="bg-gradient-to-r from-[#029aa2] to-[#036986] shadow-md text-white">
       <div className="container mx-auto py-2 px-4">
         <div className="flex justify-between items-center">
@@ -37,11 +38,12 @@ const Navbar = () => {
 
           {/* Link section */}
           <div
-            data-aos="fade-down"
+            data-aos="fade-down" // hiệu ứng hiện xuống
             data-aos-once="true"
-            data-aos-delay="300"
+            data-aos-delay="300"// trễ 300ms
             className="flex justify-between items-center gap-4"
           >
+             {/* Menu chỉ hiện trên màn hình >= sm */}
             <ul className="hidden sm:flex list-none items-center gap-4">
               {Menu.map((menu) => (
                 <li key={menu.id}>

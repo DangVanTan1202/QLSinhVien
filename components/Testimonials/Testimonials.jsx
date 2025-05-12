@@ -30,40 +30,32 @@ const TestimonialData = [
 
 const Testimonials = () => {
   const settings = {
-    dots: true,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    cssEase: 'linear',
-    pauseOnHover: true,
-    pauseOnFocus: true,
+    dots: true, // hiện dấu chấm chuyển slide
+    arrows: false, // ẩn nút mũi tên trái/phải
+    infinite: true, // lặp vô hạn
+    speed: 500, // tốc độ chuyển slide (ms)
+    slidesToScroll: 1, // mỗi lần trượt 1 item
+    autoplay: true, // tự động chạy
+    autoplaySpeed: 2000, // mỗi 2s chuyển slide
+    cssEase: 'linear', // kiểu hiệu ứng mượt
+    pauseOnHover: true, // dừng khi rê chuột
+    pauseOnFocus: true, // dừng khi focus
     responsive: [
       {
-        breakpoint: 10000,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        },
+        breakpoint: 10000, // desktop
+        settings: { slidesToShow: 3 },
       },
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
+        breakpoint: 1024, // tablet
+        settings: { slidesToShow: 2 },
       },
       {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
+        breakpoint: 640, // mobile
+        settings: { slidesToShow: 1 },
       },
     ],
   };
+  
 
   return (
     <div className="py-10 mb-10 bg-white">
@@ -89,11 +81,6 @@ const Testimonials = () => {
                 {/* Text */}
                 <p className="text-gray-600 text-sm mb-3">{data.text}</p>
                 <h5 className="text-lg font-semibold text-gray-800">{data.name}</h5>
-
-                {/* Quote icon (top right corner) */}
-                <div className="absolute top-2 right-4 text-5xl text-gray-200 select-none pointer-events-none">
-                  ,,
-                </div>
               </div>
             </div>
           ))}

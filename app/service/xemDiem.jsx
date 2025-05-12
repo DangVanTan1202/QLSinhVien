@@ -1,6 +1,4 @@
 const API_BASE = "http://guyqn123-001-site1.ptempurl.com/api/odata";
-
-
 const getToken = () => {
   if (typeof window !== "undefined") {
     return localStorage.getItem("token");
@@ -96,10 +94,7 @@ export async function fetchUserById(userId) {
       throw error;
     }
   }
-  
-  
-  
-  
+
   
   // Lấy danh sách chức năng
   export const fetchChucNangs = async (setChucNangs) => {

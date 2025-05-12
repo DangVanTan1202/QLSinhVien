@@ -94,7 +94,7 @@ return (
         </div>
         <div className="hidden md:flex w-1/2 relative items-center justify-center p-6">
           <div className="relative w-4/5 max-w-[400px]">
-            <img src="/qlsv-removebg-preview.png" alt="nón sinh viên" className="w-full h-full object-cover" />
+            <img src="/qlsv-removebg-preview.png" alt=" sinh viên" className="w-full h-full object-cover" />
             <br />
             <br />
             <br />

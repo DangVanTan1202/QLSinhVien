@@ -14,12 +14,12 @@ import "slick-carousel/slick/slick-theme.css";
 export default function HomePage() {
   useEffect(() => {
     AOS.init({
-      offset: 100,
-      duration: 700,
-      easing: "ease-in",
-      delay: 100,
+      offset: 100, // Khoảng cách từ trên trang để bắt đầu hiệu ứng
+      duration: 700, // Thời gian hiệu ứng (ms)
+      easing: "ease-in", // Kiểu chuyển động của hiệu ứng
+      delay: 100, // Độ trễ của hiệu ứng (ms)
     });
-    AOS.refresh();
+    AOS.refresh(); // Làm mới AOS khi thay đổi
   }, []);
   return (
     <div className="bg-light">

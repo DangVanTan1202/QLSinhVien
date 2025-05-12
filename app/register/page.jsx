@@ -30,7 +30,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    console.log("Sending request with:", {
+    console.log("thông tin user:", {
       TenDangNhap: form.TenDangNhap,
       MatKhau: form.MatKhau,
       HoTen: form.HoTen,

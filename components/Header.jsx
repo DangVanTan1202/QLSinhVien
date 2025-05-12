@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Bell, LogOut, Atom, Baby, Blend } from "lucide-react";
 
 export default function Header({ user, onLogout }) {
-  const router = useRouter();
-  const hasUser = user && Object.keys(user).length > 0;
+  const router = useRouter();// Khởi tạo hook useRouter
+  const hasUser = user && Object.keys(user).length > 0;// Kiểm tra xem người dùng có thông tin hay không
+
   return (
     <header className="flex justify-between items-center bg-cyan-500 p-4 shadow-md rounded-lg text-white">
       {hasUser ? (
