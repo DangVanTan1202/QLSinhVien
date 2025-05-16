@@ -17,13 +17,13 @@ export default function NopDiemUI({
   const [selectedLop, setSelectedLop] = useState("");
   const [dsDiem, setDsDiem] = useState([]);
   const handleSelectMonHoc = (e) => {
-    const id = e.target.value;
+    const id = e.target.value;// Lấy id môn học
     setSelectedMonHoc(id);
     const mon = monHocs.find((m) => m.id == id);
     if (mon) {
       setSelectedLop(mon.LopHoc.id);
       console.log(" Lớp được chọn:", mon.LopHoc.id);
-      onLopChange(mon.LopHoc.id);
+      onLopChange(mon.LopHoc.id);//Khi người dùng chọn môn học, onLopChange() sẽ gửi ID lớp để useNopDiem.jsx xử lý (load danh sách sinh viên mới theo lớp).
       setDsDiem([]);
     }
   };
@@ -31,13 +31,13 @@ export default function NopDiemUI({
     const diem = Number(value);
     setDsDiem((prev) => {
       const index = prev.findIndex((d) => d.idSinhVien === idSinhVien);
-      if (index !== -1) {
+      if (index !== -1) {// kiểm tra xem phần tử có tồn tại trong mảng
         const updated = [...prev];
-        updated[index].diem = diem;
+        updated[index].diem = diem; //Nếu đã có → cập nhật
         return updated;
       }
       return [
-        ...prev,
+        ...prev,//Nếu chưa có → thêm mới
         {
           idSinhVien,
           idMonHoc: Number(selectedMonHoc),

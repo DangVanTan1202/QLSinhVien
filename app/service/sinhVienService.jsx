@@ -5,19 +5,6 @@ const API_BASE = "http://guyqn123-001-site1.ptempurl.com/api/odata";
 export const getToken = () => {
   return localStorage.getItem("token") || "";
 };
-
-// 👉 Dùng trong Server Component
-export const fetchSinhViens = async () => {
-  try {
-    const res = await fetch(`${API_BASE}/SinhViens?$expand=User,LopHoc`);
-    const data = await res.json();
-    return data.value || [];
-  } catch (error) {
-    console.error("Lỗi fetch sinh viên:", error);
-    return [];
-  }
-};
-// 👉 Dùng trong Client Component
 export const fetchSinhViensClient = async (setSinhViens) => {
   try {
     const res = await fetch(`${API_BASE}/SinhViens?$expand=User,LopHoc`, {

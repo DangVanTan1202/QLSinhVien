@@ -9,11 +9,11 @@ import { addUser, updateUser } from "../../service/accountService";
 export default function AccountUI({
   user,
   handleLogout,
-  data,
+  data,//Danh sách tài khoản (hiển thị bảng).
   loaiTaiKhoans,
   permissions,
   onDelete,
-  onSubmitSuccess,
+  onSubmitSuccess,// được gọi sau khi gọi addUser() hoặc updateUser() để load lại dữ liệu
 }) {
   const [formData, setFormData] = useState({
     id: "",
@@ -22,7 +22,7 @@ export default function AccountUI({
     matKhau: "",
     LoaiTK_Id: "",
   });
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);//Xác định đang ở chế độ sửa (true) hay thêm mới (false)
   const [showForm, setShowForm] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");  
 
@@ -46,7 +46,7 @@ export default function AccountUI({
   };
   const filteredData = (data || []).filter(
     (tk) =>
-      tk.tenTaiKhoan.toLowerCase().includes(searchTerm.toLowerCase())
+      tk.tenTaiKhoan.toLowerCase().includes(searchTerm.toLowerCase())//Người dùng gõ vào ô tìm kiếm searchTerm thay đổi danh sách tài khoản hiển thị được lọc theo tên đăng nhập.
   );
   //  Lọc loại tài khoản để dùng trong select
   const filteredLoaiTaiKhoans = loaiTaiKhoans.filter((l) => l.ten !== "Admin");

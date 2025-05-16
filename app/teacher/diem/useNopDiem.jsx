@@ -65,7 +65,7 @@ export const useNopDiem = () => {
       }
 
       setUser(parsedUser);
-      const monHocData = await fetchMonHocsByGiangVien(parsedUser.GiangVien?.id);
+      const monHocData = await fetchMonHocsByGiangVien(parsedUser.GiangVien?.id);// lấy giảng viên thuoc mon hoc do
       setMonHocs(monHocData);
 
       const quyenData = await new Promise((resolve) =>

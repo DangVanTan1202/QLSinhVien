@@ -29,13 +29,14 @@ export default function SinhVienUI({
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    const numericFields = ["user_id", "idLopHoc"];
+    const numericFields = ["user_id", "idLopHoc"];//Các trường user_id và idLopHoc cần chuyển sang số.
+
+
     setFormData((prev) => ({
       ...prev,
       [name]: numericFields.includes(name) ? Number(value) : value,
     }));
   };
-
   const handleSubmit = async () => {
     if (isEdit) {
       await updateSinhVien(formData.id, formData);

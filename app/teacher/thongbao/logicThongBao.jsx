@@ -8,7 +8,6 @@ import {
   getDiemTheoLopVaMon,
   xoaBangDiem,
 } from "../../service/duyetDiemService";
-
 export default function useThongBaoLogic() {
   const [user, setUser] = useState(null);
   const [monHocs, setMonHocs] = useState([]);

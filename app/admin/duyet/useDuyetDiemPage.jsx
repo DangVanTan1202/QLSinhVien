@@ -88,7 +88,7 @@ export function useDuyetDiemPage() {
       };
     });
 
-    setSinhViens(mergedData);
+    setSinhViens(mergedData);//mergedData là kết quả của việc kết hợp thông tin sinh viên và điểm từ hai danh sách sinhViens và diemList.
     setDiemList(diemList);
   };
 

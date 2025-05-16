@@ -61,7 +61,7 @@ export const fetchPhanQuyenLoaiTK = async (idLoaiTK, setPhanQuyenList) => {
 // Cập nhật hoặc thêm mới phân quyền
 export const updatePhanQuyen = async (quyen) => {
   try {
-    const method = quyen.Id ? "PATCH" : "POST";
+    const method = quyen.Id ? "PATCH" : "POST";//Nếu quyen.Id có sẵn update (PATCH), ngược lại thêm mới (POST).
     const url = quyen.Id
       ? `http://guyqn123-001-site1.ptempurl.com/api/odata/PhanQuyenLoaiTks(${quyen.Id})`
       : `http://guyqn123-001-site1.ptempurl.com/api/odata/PhanQuyenLoaiTks`;

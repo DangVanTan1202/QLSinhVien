@@ -3,7 +3,6 @@ import { useState } from "react";
 import { PlusCircleIcon ,ArrowBigLeftDashIcon} from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-
 export default function DuyetDiemUI({
   user,
   handleLogout,
@@ -22,8 +21,8 @@ export default function DuyetDiemUI({
   const handleBack = () => {
     setSelectedMonHoc(null);
   };
-  const trangThaiBangDiem = sinhViens.length > 0 && ("isDuyet" in sinhViens[0]) 
-  ? (sinhViens[0].isDuyet ?? null)
+  const trangThaiBangDiem = sinhViens.length > 0 && ("isDuyet" in sinhViens[0]) //Nếu không có sinh viên → không có bảng điểm → trả về null.
+  ? (sinhViens[0].isDuyet ?? null)// Kiểm tra xem đối tượng sinh viên đầu tiên có chứa thuộc tính isDuyet không.
   : null;
   return (
     <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">

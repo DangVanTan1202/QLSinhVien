@@ -39,7 +39,6 @@ export function useXemDiem() {
         const quyenData = await new Promise((resolve) => {
           fetchPhanQuyenByLoaiTK(parsedUser?.LoaiTK_Id, resolve);
         });
-
         const chucNangsData = await new Promise((resolve) => {
           fetchChucNangs(resolve);
         });

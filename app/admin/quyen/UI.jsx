@@ -13,11 +13,9 @@ export default function RoleUI({
   phanQuyenList,
   onPermissionChange
 }) {
-  const [selectedChucNangToAdd, setSelectedChucNangToAdd] = useState("");
-
+  const [selectedChucNangToAdd, setSelectedChucNangToAdd] = useState("");//lưu id chức năng người dùng đang chọn để thêm mới vào danh sách phân quyền.
   const getQuyen = (chucNangId) =>
     phanQuyenList.find((pq) => pq.IdChucNang === chucNangId) || {};
-
   const permissions = [
     { label: "Thêm", key: "Them" },
     { label: "Sửa", key: "Sua" },
@@ -28,9 +26,9 @@ export default function RoleUI({
     { label: "Nộp", key: "Nop" }
   ];
 
-  const chucNangsDaPhanQuyen = phanQuyenList.map((pq) => pq.IdChucNang);
+  const chucNangsDaPhanQuyen = phanQuyenList.map((pq) => pq.IdChucNang);// Lấy danh sách id chức năng đã được phân quyền
   const chucNangsChuaPhanQuyen = chucNangs.filter(
-    (cn) => !chucNangsDaPhanQuyen.includes(cn.id)
+    (cn) => !chucNangsDaPhanQuyen.includes(cn.id)//Tìm các chức năng chưa được phân quyền (để thêm mới)
   );
 
   const handleAddChucNang = () => {
@@ -40,10 +38,9 @@ export default function RoleUI({
         permission: "Xem", // Quyền mặc định khi thêm mới
         value: true,
       });
-      setSelectedChucNangToAdd("");
+      setSelectedChucNangToAdd("");// reset dropdown
     }
   };
-
   const handleRemoveChucNang = (chucNangId) => {
     onPermissionChange({
       chucNangId,
@@ -56,12 +53,10 @@ export default function RoleUI({
     <Sidebar user={user} />
     <div className="flex-1 px-8 py-6">
       <Header user={user} onLogout={handleLogout} />
-  
       <div className="mt-6">
         <h2 className="text-3xl font-semibold text-orange-600 mb-6">
           Phân quyền theo loại tài khoản
         </h2>
-  
         <div className="mb-8">
           <label className="block text-base font-medium mb-2 text-gray-700">
             Chọn loại tài khoản:
@@ -79,7 +74,6 @@ export default function RoleUI({
             ))}
           </select>
         </div>
-  
         {selectedLoaiTK && (
           <>
             <table className="w-full text-sm border-separate border-spacing-y-2">
@@ -105,7 +99,7 @@ export default function RoleUI({
                         <td key={perm.key} className="p-3 text-center">
                           <input
                             type="checkbox"
-                            checked={pq[perm.key] === true}
+                            checked={pq[perm.key] === true}//ấn mỗi checkbox gọi onPermissionChange
                             onChange={(e) =>
                               onPermissionChange({
                                 chucNangId: pq.IdChucNang,

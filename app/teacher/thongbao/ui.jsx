@@ -44,7 +44,7 @@ export default function ThongBaoUI({
                 <option value="">-- Chọn môn học --</option>
                 {monHocs.map((mh) => (
                   <option key={mh.id} value={mh.id}>
-                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.tenLop}) - GV:{" "}
+                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.tenLop})
                     {mh.GiangVien?.hoTen}
                   </option>
                 ))}

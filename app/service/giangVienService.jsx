@@ -4,18 +4,6 @@ const API_BASE = 'http://guyqn123-001-site1.ptempurl.com/api/odata';
 export const getToken = () => {
   return localStorage.getItem("token") || "";
 };
-
-// Dùng trong Server Component
-export const fetchGiangViens = async () => {
-  try {
-    const res = await fetch(`${API_BASE}/GiangViens?$expand=User`);
-    const data = await res.json();
-    return data.value || [];
-  } catch (error) {
-    console.error("Lỗi fetch giảng viên:", error);
-    return [];
-  }
-};
 //  Dùng trong Client Component
 export const fetchGiangViensClient = async (setGiangViens) => {
   try {

@@ -15,7 +15,7 @@ export function useRoleLogic() {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [loaiTKList, setLoaiTKList] = useState([]);
-  const [selectedLoaiTK, setSelectedLoaiTK] = useState("");
+  const [selectedLoaiTK, setSelectedLoaiTK] = useState("");// ID loại TK được chọn
   const [chucNangs, setChucNangs] = useState([]);
   const [phanQuyenList, setPhanQuyenList] = useState([]);
   const router = useRouter();
@@ -32,14 +32,12 @@ export function useRoleLogic() {
       router.push("/login");
       return;
     }
-
     try {
       const parsedUser = JSON.parse(storedUser);
       if (parsedUser.LoaiTK_Name !== "Admin") {
         router.push("/login");
         return;
       }
-
       setUser(parsedUser);
       const token = localStorage.getItem("token");
       fetchUsers(token, setUsers);
@@ -49,7 +47,6 @@ export function useRoleLogic() {
       router.push("/login");
     }
   }, [router]);
-
   useEffect(() => {
     fetchLoaiTK(setLoaiTKList);
     fetchChucNangs(setChucNangs);
@@ -63,9 +60,9 @@ export function useRoleLogic() {
     }
   }, [selectedLoaiTK]);
 
-  const handlePermissionChange = async ({ chucNangId, permission, value }) => {
+  const handlePermissionChange = async ({ chucNangId, permission, value }) => {//nhận đầu vào từ ui
     const loaiTKId = parseInt(selectedLoaiTK);
-    const existing = phanQuyenList.find(
+    const existing = phanQuyenList.find( // kiểm tra phân quyền này đã tồn tại chưa
       (pq) => pq.IdChucNang === chucNangId && pq.IdLoaiTK === loaiTKId
     );
 

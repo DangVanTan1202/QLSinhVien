@@ -1,11 +1,9 @@
 export async function doiMatKhau(MatKhauCu,MatKhauMoi ) {
   try {
     const token = localStorage.getItem("token");
-
     if (!token) {
       return { success: false, message: "Không tìm thấy token đăng nhập." };
     }
-
     const response = await fetch(
       "http://guyqn123-001-site1.ptempurl.com/QuanLyTaiKhoan/DoiMatKhau",
       {
@@ -17,9 +15,7 @@ export async function doiMatKhau(MatKhauCu,MatKhauMoi ) {
         body: JSON.stringify({ MatKhauCu, MatKhauMoi }),
       }
     );
-
     const result = await response.json();
-
     if (response.ok) {
       return { success: true, data: result };
     } else {

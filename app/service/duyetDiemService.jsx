@@ -61,7 +61,7 @@ export const fetchSinhViensByLop = async (idLopHoc) => {
 export const getDiemTheoLopVaMon = async (idLopHoc, idMonHoc) => {
     try {
       const res = await fetch(
-        `${API_BASE}/DiemSoes?$filter=idMonHoc eq ${idMonHoc} and SinhVien/idLopHoc eq ${idLopHoc}&$expand=SinhVien`,
+        `${API_BASE}/DiemSoes?$filter=idMonHoc eq ${idMonHoc} and SinhVien/idLopHoc eq ${idLopHoc}&$expand=SinhVien`,//SinhVien/idLopHoc (nghĩa là sinh viên thuộc lớp nào)
         {
           headers: {
             Authorization: `Bearer ${getToken()}`,

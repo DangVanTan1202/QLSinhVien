@@ -28,7 +28,7 @@ export const fetchMonHocsByGiangVien = async (idGiangVien) => {
 export const fetchSinhViensByLop = async (idLopHoc) => {
     try {
       // Fetch sinh viên theo lớp
-      const res = await fetch(`${API_BASE}/SinhViens?$filter=idLopHoc eq ${idLopHoc}`, {
+      const res = await fetch(`${API_BASE}/SinhViens?$filter=idLopHoc eq ${idLopHoc}`, {//Lọc ra các sinh viên có trường idLopHoc bằng với idLopHoc được truyền vào
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
@@ -63,6 +63,7 @@ export const fetchSinhViensByLop = async (idLopHoc) => {
     try {
       const res = await fetch(
         `${API_BASE}/DiemSoes?$filter=idMonHoc eq ${idMonHoc} and SinhVien/idLopHoc eq ${idLopHoc}&$expand=SinhVien`,
+        // lấy điểm của môn học cụ thể ,SinhVien/idLopHoc: là cách truy cập trường idLopHoc nằm trong đối tượng liên kết SinhVien
         {
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -82,7 +83,7 @@ export const submitDiem = async ({ idSinhVien, idMonHoc, diem, idGiangVien }) =>
     try {
       // 1. Kiểm tra điểm đã có chưa
       const checkRes = await fetch(
-        `${API_BASE}/DiemSoes?$filter=idSinhVien eq ${idSinhVien} and idMonHoc eq ${idMonHoc}`,
+        `${API_BASE}/DiemSoes?$filter=idSinhVien eq ${idSinhVien} and idMonHoc eq ${idMonHoc}`,//Lọc theo điều kiện sinh viên + môn học, để kiểm tra điểm có tồn tại chưa.
         {
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -140,7 +141,7 @@ export const fetchChucNangs = async (setChucNangs) => {
 // Lấy danh sách phân quyền theo loại tài khoản
 export const fetchPhanQuyenByLoaiTK = async (idLoaiTK, setPhanQuyenList) => {
   try {
-    const res = await fetch(`${API_BASE}/PhanQuyenLoaiTks?$filter=IdLoaiTK eq ${idLoaiTK}`, {
+    const res = await fetch(`${API_BASE}/PhanQuyenLoaiTks?$filter=IdLoaiTK eq ${idLoaiTK}`, {//chỉ lấy những dòng mà loại tài khoản = idLoaiTK.
       headers: {
         Authorization: `Bearer ${getToken()}`
       }

@@ -3,14 +3,14 @@ import { useRouter } from "next/navigation";
 import {
   fetchUsersClient,
   fetchLoaiTaiKhoans,
-  fetchPhanQuyenByLoaiTK,
+  fetchPhanQuyenByLoaiTK,                                                                                                                                                                                                                                                                                                                                                                                                              
   fetchChucNangs,
   deleteUser,
 } from "../../service/accountService";
 
 export function useAccountPage() {
-  const [user, setUser] = useState(null);
-  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState(null); // Người dùng hiện tại
+  const [users, setUsers] = useState([]);// Danh sách tài khoản người dùng
   const [loaiTaiKhoans, setLoaiTaiKhoans] = useState([]);
   const [permissions, setPermissions] = useState({
     Them: false,
@@ -70,7 +70,7 @@ export function useAccountPage() {
 
   const handleDelete = async (id) => {
     await deleteUser(id);
-    setUsers((prev) => prev.filter((user) => user.id !== id));
+    setUsers((prev) => prev.filter((user) => user.id !== id));// cập nhật lại danh sách
   };
 
   const handleSubmitSuccess = async () => {
