@@ -16,36 +16,47 @@ export default function NopDiemUI({
   const [selectedMonHoc, setSelectedMonHoc] = useState("");
   const [selectedLop, setSelectedLop] = useState("");
   const [dsDiem, setDsDiem] = useState([]);
+
   const handleSelectMonHoc = (e) => {
-    const id = e.target.value;// Lấy id môn học
+    const id = e.target.value;
     setSelectedMonHoc(id);
     const mon = monHocs.find((m) => m.id == id);
     if (mon) {
       setSelectedLop(mon.LopHoc.id);
-      console.log(" Lớp được chọn:", mon.LopHoc.id);
-      onLopChange(mon.LopHoc.id);//Khi người dùng chọn môn học, onLopChange() sẽ gửi ID lớp để useNopDiem.jsx xử lý (load danh sách sinh viên mới theo lớp).
+      onLopChange(mon.LopHoc.id);
       setDsDiem([]);
     }
   };
-  const handleInputChange = (idSinhVien, value) => {
-    const diem = Number(value);
+
+  const handleInputChange = (idSinhVien, type, value) => {
+    let numericValue = value === "" ? 0 : parseFloat(value);
+    if (isNaN(numericValue)) numericValue = 0;
+
     setDsDiem((prev) => {
       const index = prev.findIndex((d) => d.idSinhVien === idSinhVien);
-      if (index !== -1) {// kiểm tra xem phần tử có tồn tại trong mảng
-        const updated = [...prev];
-        updated[index].diem = diem; //Nếu đã có → cập nhật
+      const updated = [...prev];
+      if (index !== -1) {
+        updated[index][type] = numericValue;
+        updated[index].diem = calculateDiem(updated[index]);
         return updated;
-      }
-      return [
-        ...prev,//Nếu chưa có → thêm mới
-        {
+      } else {
+        const newEntry = {
           idSinhVien,
           idMonHoc: Number(selectedMonHoc),
           idGiangVien: user?.GiangVien?.id || 0,
-          diem,
-        },
-      ];
+          diemCC: type === "diemCC" ? numericValue : 0,
+          diemGK: type === "diemGK" ? numericValue : 0,
+          diemCK: type === "diemCK" ? numericValue : 0,
+          diem: 0,
+        };
+        newEntry.diem = calculateDiem(newEntry);
+        return [...prev, newEntry];
+      }
     });
+  };
+
+  const calculateDiem = ({ diemCC = 0, diemGK = 0, diemCK = 0 }) => {
+    return parseFloat((diemCC * 0.1 + diemGK * 0.3 + diemCK * 0.6).toFixed(2));
   };
 
   return (
@@ -53,7 +64,9 @@ export default function NopDiemUI({
       <Sidebar user={user} />
       <div className="flex-1 px-8 py-6">
         <Header user={user} onLogout={handleLogout} />
-        <h2 className="text-4xl font-bold text-orange-600 mb-8">nhập điểm cho sinh viên </h2>
+        <h2 className="text-4xl font-bold text-orange-600 mb-8">
+          nhập điểm cho sinh viên
+        </h2>
         {permissions.Xem ? (
           <>
             <div className="space-y-2 p-6 border-pink-200 mb-6">
@@ -73,35 +86,58 @@ export default function NopDiemUI({
             {selectedLop && (
               <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-200">
                 <h3 className="text-xl font-semibold mb-4">
-                  Danh sách sinh viên lớp
-                   {monHocs.find(m => m.id == selectedMonHoc)?.LopHoc?.tenLop}
+                  Danh sách sinh viên lớp{" "}
+                  {monHocs.find((m) => m.id == selectedMonHoc)?.LopHoc?.tenLop}
                 </h3>
                 <table className="w-full text-left border border-gray-200">
                   <thead>
                     <tr className="bg-pink-200 text-stone-700">
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>
-                      <th className="p-3">Điểm</th>
+                      <th className="p-3">Điểm CC</th>
+                      <th className="p-3">Điểm GK</th>
+                      <th className="p-3">Điểm CK</th>
+                      <th className="p-3">Điểm TB</th>
                     </tr>
                   </thead>
                   <tbody>
-                  {(sinhViens || []).map((sv) => (
-                      <tr key={sv.id} className="hover:bg-green-100">
-                        <td className="p-3">{sv.hoTen}</td>
-                        <td className="p-3">{sv.maSinhVien}</td>
-                        <td className="p-0">
-                          <input
-                            type="number"
-                            min={1}
-                            max={10}
-                            className="input input-bordered w-28 px-4 py-2 text-lg rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-all"
-                            onChange={(e) =>
-                              handleInputChange(sv.id, e.target.value)
-                            }
-                          />
-                        </td>
-                      </tr>
-                    ))}
+                    {(sinhViens || []).map((sv) => {
+                      const svDiem = dsDiem.find((d) => d.idSinhVien === sv.id);
+                      return (
+                        <tr key={sv.id} className="hover:bg-green-100">
+                          <td className="p-3">{sv.hoTen}</td>
+                          <td className="p-3">{sv.maSinhVien}</td>
+
+                          {["diemCC", "diemGK", "diemCK"].map((type) => (
+                            <td className="p-2" key={type}>
+                              <input
+                                type="number"
+                                step="0.01"
+                                min={0}
+                                max={10}
+                                className="w-20 px-2 py-1 text-sm rounded-md border-2 border-orange-400 focus:outline-none focus:ring-0 focus:border-orange-400"
+                                value={svDiem?.[type] ?? ""}
+                                onChange={(e) => {
+                                  let raw = e.target.value;
+                                  if (raw === "") {
+                                    handleInputChange(sv.id, type, "");
+                                    return;
+                                  }
+                                  let value = parseFloat(raw);
+                                  if (isNaN(value)) return;
+                                  if (value < 0) value = 0;
+                                  if (value > 10) value = 10;
+                                  handleInputChange(sv.id, type, value);
+                                }}
+                              />
+                            </td>
+                          ))}
+                          <td className="p-2 text-center">
+                            {svDiem?.diem?.toFixed(2) || "----"}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
                 {permissions.Nop && (
@@ -119,7 +155,7 @@ export default function NopDiemUI({
           </>
         ) : (
           <div className="text-center text-red-600 font-bold mt-10">
-          Bạn không có quyền xem trang này
+            Bạn không có quyền xem trang này
           </div>
         )}
       </div>

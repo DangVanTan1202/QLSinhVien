@@ -33,7 +33,6 @@ export const fetchSinhViensByLop = async (idLopHoc) => {
       });
       const sinhViensData = await res.json();
       const sinhViens = sinhViensData.value || [];
-      
       // Lấy thông tin họ tên từ bảng User cho từng sinh viên
       const sinhViensWithNames = await Promise.all(
         sinhViens.map(async (sv) => {

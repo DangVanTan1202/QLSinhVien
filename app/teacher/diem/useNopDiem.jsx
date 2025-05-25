@@ -95,10 +95,21 @@ export const useNopDiem = () => {
   const handleSubmit = async (dsDiem) => {
     let successCount = 0;
     let errorMessages = [];
-
+  
     for (const d of dsDiem) {
+      const diemCC = parseFloat(d.diemCC) || 0;
+      const diemGK = parseFloat(d.diemGK) || 0;
+      const diemCK = parseFloat(d.diemCK) || 0;
+      const diem = diemCC * 0.1 + diemGK * 0.3 + diemCK * 0.6;
+  
       try {
-        await submitDiem(d);
+        await submitDiem({
+          ...d,
+          diemCC,
+          diemGK,
+          diemCK,
+          diem: parseFloat(diem.toFixed(2)),
+        });
         successCount++;
       } catch (error) {
         const sv = sinhViens.find((s) => s.id === d.idSinhVien);
@@ -106,11 +117,11 @@ export const useNopDiem = () => {
         errorMessages.push(`mã sinh viên ${maSinhVien}: ${error.message}`);
       }
     }
-
+  
     if (successCount > 0) {
       alert(`Đã nộp điểm cho ${successCount} sinh viên.`);
     }
-
+  
     if (errorMessages.length > 0) {
       alert(
         ` Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join(
@@ -119,6 +130,7 @@ export const useNopDiem = () => {
       );
     }
   };
+  
   return {
     user,
     monHocs,

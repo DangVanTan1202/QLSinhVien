@@ -5,7 +5,7 @@ export const getToken = () => {
   return localStorage.getItem("token") || "";
 };
 
-// 👉 Dùng trong Server Component để lấy môn học
+//  Dùng trong Server Component để lấy môn học
 export const fetchMonHocs = async () => {
   try {
     const res = await fetch(`${API_BASE}/MonHocs?$expand=GiangVien,LopHoc`, {
@@ -20,8 +20,7 @@ export const fetchMonHocs = async () => {
     return [];
   }
 };
-
-// 👉 Dùng trong Client Component để lấy môn học và cập nhật state
+// Dùng trong Client Component để lấy môn học và cập nhật state
 export const fetchMonHocsClient = async (setMonHocs) => {
   try {
     const res = await fetch(`${API_BASE}/MonHocs?$expand=GiangVien,LopHoc`, {
@@ -89,9 +88,7 @@ export const addMonHoc = async (data) => {
       idGiangVien: Number(data.idGiangVien),
       idLopHoc: Number(data.idLopHoc),
     };
-
     console.log("Payload gửi đi:", payload); // debug trước khi gửi
-
     const res = await fetch(`${API_BASE}/MonHocs`, {
       method: "POST",
       headers: {
