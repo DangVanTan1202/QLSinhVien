@@ -43,8 +43,8 @@ export default function ThongBaoUI({
               >
                 <option value="">-- Chọn môn học --</option>
                 {monHocs.map((mh) => (
-                  <option key={mh.id} value={mh.id}>
-                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.tenLop})
+                  <option key={mh.id} value={mh.id}> 
+                   môn : ({mh.maMonHoc} - {mh.tenMonHoc} )   lớp :({mh.LopHoc?.tenLop})
                     {mh.GiangVien?.hoTen}
                   </option>
                 ))}
@@ -62,7 +62,10 @@ export default function ThongBaoUI({
                     <tr>
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>
-                      <th className="p-3">Điểm</th>
+                      <th className="p-3 text-center">Điểm Chuyên cần</th>
+                      <th className="p-3 text-center">Điểm Giữa kỳ</th>
+                      <th className="p-3 text-center">Điểm Cuối kỳ</th>
+                      <th className="p-3 text-center">Điểm TB</th>
                       <th className="p-3">Trạng thái</th>
                     </tr>
                   </thead>
@@ -71,7 +74,10 @@ export default function ThongBaoUI({
                       <tr key={sv.id} className="hover:bg-purple-50">
                         <td className="p-3">{sv.hoTen}</td>
                         <td className="p-3">{sv.maSinhVien}</td>
-                        <td className="p-3">{sv.diem ?? "Chưa có"}</td>
+                        <td className="p-3 text-center">{sv.diemCC ?? "-"}</td>
+                        <td className="p-3 text-center">{sv.diemGK ?? "-"}</td>
+                        <td className="p-3 text-center">{sv.diemCK ?? "-"}</td>
+                        <td className="p-3 text-center">{sv.diem ?? "-"}</td>
                         <td className="p-3">
                           {sv.isDuyet === true
                             ? " Đã duyệt"

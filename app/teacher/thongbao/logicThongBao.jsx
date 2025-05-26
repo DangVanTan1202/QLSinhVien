@@ -103,6 +103,9 @@ export default function useThongBaoLogic() {
         const diem = diemList.find((d) => d.idSinhVien === sv.id);
         return {
           ...sv,
+          diemCC: diem?.diemCC ?? null,
+          diemGK: diem?.diemGK ?? null,
+          diemCK: diem?.diemCK ?? null,
           diem: diem?.diem ?? null,
           isDuyet: diem?.isDuyet ?? null,
         };

@@ -74,6 +74,9 @@ export const getDiemTheoLopVaMon = async (idLopHoc, idMonHoc) => {
         idSinhVien: d.SinhVien?.id,
         hoTen: d.SinhVien?.hoTen,
         maSinhVien: d.SinhVien?.maSinhVien,
+        diemCC: d.diemCC,
+        diemGK: d.diemGK,
+        diemCK: d.diemCK,
         diem: d.diem,
         isDuyet: d.isDuyet,
       }));

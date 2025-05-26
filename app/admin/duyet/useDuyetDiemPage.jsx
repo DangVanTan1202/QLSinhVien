@@ -21,9 +21,7 @@ export function useDuyetDiemPage() {
     Duyet: false,
     TuChoi: false,
   });
-
   const router = useRouter();
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -83,6 +81,9 @@ export function useDuyetDiemPage() {
       const diem = diemList.find((d) => d.idSinhVien === sv.id);
       return {
         ...sv,
+        diemCC: diem?.diemCC ?? null,
+        diemGK: diem?.diemGK ?? null,
+        diemCK: diem?.diemCK ?? null,
         diem: diem?.diem ?? null,
         isDuyet: diem?.isDuyet ?? null,
       };

@@ -27,11 +27,9 @@ export default function NopDiemUI({
       setDsDiem([]);
     }
   };
-
   const handleInputChange = (idSinhVien, type, value) => {
     let numericValue = value === "" ? 0 : parseFloat(value);
     if (isNaN(numericValue)) numericValue = 0;
-
     setDsDiem((prev) => {
       const index = prev.findIndex((d) => d.idSinhVien === idSinhVien);
       const updated = [...prev];
@@ -94,9 +92,9 @@ export default function NopDiemUI({
                     <tr className="bg-pink-200 text-stone-700">
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>
-                      <th className="p-3">Điểm CC</th>
-                      <th className="p-3">Điểm GK</th>
-                      <th className="p-3">Điểm CK</th>
+                      <th className="p-3">Điểm Chuyên Cần</th>
+                      <th className="p-3">Điểm Giữa Kỳ</th>
+                      <th className="p-3">Điểm Cuối kỳ</th>
                       <th className="p-3">Điểm TB</th>
                     </tr>
                   </thead>

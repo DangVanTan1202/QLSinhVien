@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { PlusCircleIcon ,ArrowBigLeftDashIcon} from "lucide-react";
+import { PlusCircleIcon, ArrowBigLeftDashIcon } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 export default function DuyetDiemUI({
@@ -21,9 +21,10 @@ export default function DuyetDiemUI({
   const handleBack = () => {
     setSelectedMonHoc(null);
   };
-  const trangThaiBangDiem = sinhViens.length > 0 && ("isDuyet" in sinhViens[0]) //Nếu không có sinh viên → không có bảng điểm → trả về null.
-  ? (sinhViens[0].isDuyet ?? null)// Kiểm tra xem đối tượng sinh viên đầu tiên có chứa thuộc tính isDuyet không.
-  : null;
+  const trangThaiBangDiem =
+    sinhViens.length > 0 && "isDuyet" in sinhViens[0] //Nếu không có sinh viên → không có bảng điểm → trả về null.
+      ? sinhViens[0].isDuyet ?? null // Kiểm tra xem đối tượng sinh viên đầu tiên có chứa thuộc tính isDuyet không.
+      : null;
   return (
     <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
@@ -32,7 +33,6 @@ export default function DuyetDiemUI({
         <h2 className="text-4xl font-bold text-orange-600 mb-8">
           Duyệt bảng điểm môn học
         </h2>
-
         {permissions.Xem ? (
           <>
             {!selectedMonHoc ? (
@@ -62,7 +62,7 @@ export default function DuyetDiemUI({
                             className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
                             onClick={() => handleSelectMonHoc(mh)}
                           >
-                           <PlusCircleIcon size={20}/> 
+                            <PlusCircleIcon size={20} />
                           </button>
                         </td>
                       </tr>
@@ -77,11 +77,10 @@ export default function DuyetDiemUI({
                     Danh sách sinh viên lớp {selectedMonHoc.LopHoc?.tenLop}
                   </h3>
                   <button
-                    
                     className="text-blue-600 hover:underline font-medium"
                     onClick={handleBack}
                   >
-                     ---- Quay lại chọn môn học
+                    --Quay lại chọn môn học--
                   </button>
                 </div>
                 <table className="w-full text-left border border-gray-200">
@@ -89,7 +88,10 @@ export default function DuyetDiemUI({
                     <tr>
                       <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>
-                      <th className="p-3">Điểm</th>
+                      <th className="p-3 text-center">Điểm Chuyên cần</th>
+                      <th className="p-3 text-center">Điểm Giữa kỳ</th>
+                      <th className="p-3 text-center">Điểm Cuối kỳ</th>
+                      <th className="p-3 text-center">Điểm TB</th>
                       <th className="p-3">Trạng thái</th>
                     </tr>
                   </thead>
@@ -98,7 +100,10 @@ export default function DuyetDiemUI({
                       <tr key={sv.id} className="hover:bg-green-100">
                         <td className="p-3">{sv.hoTen}</td>
                         <td className="p-3">{sv.maSinhVien}</td>
-                        <td className="p-3">{sv.diem ?? "Chưa có"}</td>
+                        <td className="p-3 text-center">{sv.diemCC ?? "-"}</td>
+                        <td className="p-3 text-center">{sv.diemGK ?? "-"}</td>
+                        <td className="p-3 text-center">{sv.diemCK ?? "-"}</td>
+                        <td className="p-3 text-center">{sv.diem ?? "Chưa có"}</td>
                         <td className="p-3">
                           {sv?.isDuyet === true
                             ? "Đã duyệt"

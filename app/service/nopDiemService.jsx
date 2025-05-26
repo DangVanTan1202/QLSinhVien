@@ -79,7 +79,7 @@ export const fetchSinhViensByLop = async (idLopHoc) => {
     }
   };
 // Gửi điểm cho sinh viên
-export const submitDiem = async ({ idSinhVien, idMonHoc, diem, idGiangVien }) => {
+export const submitDiem = async ({ idSinhVien, idMonHoc, diem, idGiangVien,diemCC,diemGK,diemCK }) => {
     try {
       // 1. Kiểm tra điểm đã có chưa
       const checkRes = await fetch(
@@ -109,6 +109,9 @@ export const submitDiem = async ({ idSinhVien, idMonHoc, diem, idGiangVien }) =>
           diem,
           idGiangVien,
           isDuyet: null, 
+          diemCC,
+          diemGK,
+          diemCK
         }),
       });
   

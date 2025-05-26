@@ -25,7 +25,6 @@ export default function RoleUI({
     { label: "Từ chối", key: "TuChoi" },
     { label: "Nộp", key: "Nop" }
   ];
-
   const chucNangsDaPhanQuyen = phanQuyenList.map((pq) => pq.IdChucNang);// Lấy danh sách id chức năng đã được phân quyền
   const chucNangsChuaPhanQuyen = chucNangs.filter(
     (cn) => !chucNangsDaPhanQuyen.includes(cn.id)//Tìm các chức năng chưa được phân quyền (để thêm mới)
