@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { X } from "lucide-react";
 import { useState } from "react";
+import { exportToExcel } from "../../../components/exportToExcel"; 
 export default function XemDiemUI({ user, handleLogout, data, permissions }) {
   const [searchTerm, setSearchTerm] = useState("");
   const filteredData = (data || []).filter((item) => {
@@ -33,6 +34,15 @@ export default function XemDiemUI({ user, handleLogout, data, permissions }) {
           </div>
           {/* Bảng điểm */}
           {permissions.Xem ? (
+            <>
+            <div className="flex justify-end mb-2">
+            <button
+              onClick={() => exportToExcel(filteredData)}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow"
+            >
+              Xuất Excel
+            </button>
+          </div>
             <div className="overflow-auto">
               <table className="w-full bg-white shadow rounded overflow-hidden">
                 <thead className="bg-pink-200 text-stone-700">
@@ -40,28 +50,32 @@ export default function XemDiemUI({ user, handleLogout, data, permissions }) {
                     <th className="p-3 text-left">Mã môn học</th>
                     <th className="p-3 text-left">Tên môn học</th>
                     <th className="p-3 text-center">Điểm Chuyên cần</th>
-                     <th className="p-3 text-center">Điểm Giữa kỳ</th>
+                    <th className="p-3 text-center">Điểm Giữa kỳ</th>
                     <th className="p-3 text-center">Điểm Cuối kỳ</th>
-                    <th className="p-3 text-center">Điểm Trung Bình </th>
+                    <th className="p-3 text-center">Điểm Hệ 10 </th>
+                    <th className="p-3 text-center">Điểm Hệ 4</th>
+                    <th className="p-3 text-center">Điểm chữ</th>
+                    <th className="p-3 text-center">Kết quả</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredData.map((item, index) => (
-                    <tr
-                      key={index}
-                      className="hover:bg-green-100 "
-                    >
+                    <tr key={index} className="hover:bg-green-100 ">
                       <td className="p-3">{item.maMonHoc}</td>
                       <td className="p-3">{item.tenMonHoc}</td>
                       <td className="p-3 text-center font-semibold text-blue-600">{item.diemCC}</td>
-                      <td className="p-3 text-center font-semibold text-blue-600">{item.diemGK}</td>
+                      <td className="p-3 text-center font-semibold text-blue-600"> {item.diemGK}</td>
                       <td className="p-3 text-center font-semibold text-blue-600">{item.diemCK}</td>
-                      <td className="p-3 text-center font-semibold text-blue-600">{item.diem}</td>
+                      <td className="p-3 text-center font-semibold text-blue-600">{item.diem} </td>
+                      <td className="p-3 text-center font-semibold text-blue-600">{item.diemHe4}</td>
+                      <td className="p-3 text-center font-semibold text-blue-600">{item.diemChu}</td>
+                      <td className="p-3 text-center font-semibold text-blue-600">{item.ketQua}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            </>
           ) : (
             <div className="text-center text-red-600 font-bold mt-4">
               <X size={18} className="inline mr-2" />
