@@ -92,7 +92,7 @@ export default function DuyetDiemUI({
                       <th className="p-3 text-center">Điểm Giữa kỳ</th>
                       <th className="p-3 text-center">Điểm Cuối kỳ</th>
                       <th className="p-3 text-center">Điểm TB</th>
-                      <th className="p-3">Trạng thái</th>
+                      {/* <th className="p-3">Trạng thái</th> */}
                     </tr>
                   </thead>
                   <tbody>
@@ -104,13 +104,13 @@ export default function DuyetDiemUI({
                         <td className="p-3 text-center">{sv.diemGK ?? "-"}</td>
                         <td className="p-3 text-center">{sv.diemCK ?? "-"}</td>
                         <td className="p-3 text-center">{sv.diem ?? "Chưa có"}</td>
-                        <td className="p-3">
+                        {/* <td className="p-3">
                           {sv?.isDuyet === true
                             ? "Đã duyệt"
                             : sv?.isDuyet === false
                             ? "Bị từ chối"
                             : "Chờ duyệt"}
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>

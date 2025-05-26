@@ -7,7 +7,6 @@ import {
   fetchPhanQuyenByLoaiTK,
   fetchChucNangs,
   fetchSinhVienByUserId,
-  fetchUserById,
 } from "../../service/xemDiem";
 export function useXemDiem() {
   const [user, setUser] = useState(null);
@@ -58,35 +57,24 @@ export function useXemDiem() {
 
           const mappedData = await Promise.all(
             rawData.map(async (item) => {
-              let tenGiangVien = "N/A";
-              const giangVienUserId = item.GiangVien?.user_id;
-              if (giangVienUserId) {
-                try {
-                  const userGV = await fetchUserById(giangVienUserId);
-                  tenGiangVien = userGV?.hoTen || "N/A";
-                } catch (error) {
-                  console.error("Lỗi khi lấy thông tin giảng viên:", error);
-                }
-              }
               return {
                 maMonHoc: item.MonHoc?.maMonHoc || "N/A",
                 tenMonHoc: item.MonHoc?.tenMonHoc || "N/A",
-                tenGiangVien,
+                diemCC: item.diemCC ?? "chua co",
+                diemGK: item.diemGK ?? "chua co",
+                diemCK: item.diemCK ?? "chua co",
                 diem: item.diem ?? "Chưa có",
               };
             })
           );
-
           setDiemData(mappedData);
         }
       } catch (error) {
         console.error("Lỗi khi tải dữ liệu điểm:", error);
       }
     };
-
     loadPermissionsAndData();
   }, []);
-
   return {
     user,
     diemData,

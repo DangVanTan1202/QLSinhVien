@@ -24,7 +24,10 @@ export default function ThongBaoUI({
       onMonHocChange(mon.id);
     }
   };
-  const isBangDiemTuChoi = sinhViens?.some((sv) => sv.isDuyet === false);
+  const trangThaiBangDiem =
+    sinhViens.length > 0 && "isDuyet" in sinhViens[0] //Nếu không có sinh viên → không có bảng điểm → trả về null.
+      ? sinhViens[0].isDuyet ?? null // Kiểm tra xem đối tượng sinh viên đầu tiên có chứa thuộc tính isDuyet không.
+      : null;
   return (
     <div className="flex min-h-screen bg-neutral-200">
       <Sidebar user={user} />
@@ -60,36 +63,57 @@ export default function ThongBaoUI({
                 <table className="w-full border border-gray-300 text-left">
                   <thead className="bg-pink-200 text-stone-700">
                     <tr>
-                      <th className="p-3">Họ tên</th>
-                      <th className="p-3">Mã SV</th>
+                      <th className="p-3 text-center">Mã sinh viên</th>
+                      <th className="p-3 text-center">Họ tên</th>
                       <th className="p-3 text-center">Điểm Chuyên cần</th>
                       <th className="p-3 text-center">Điểm Giữa kỳ</th>
                       <th className="p-3 text-center">Điểm Cuối kỳ</th>
                       <th className="p-3 text-center">Điểm TB</th>
-                      <th className="p-3">Trạng thái</th>
+                      {/* <th className="p-3">Trạng thái</th> */}
                     </tr>
                   </thead>
                   <tbody>
                     {sinhViens.map((sv) => (
-                      <tr key={sv.id} className="hover:bg-purple-50">
-                        <td className="p-3">{sv.hoTen}</td>
-                        <td className="p-3">{sv.maSinhVien}</td>
+                      <tr key={sv.id} className="hover:bg-green-100">
+                        <td className="p-3 text-center">{sv.maSinhVien}</td>
+                        <td className="p-3 text-center">{sv.hoTen}</td>
                         <td className="p-3 text-center">{sv.diemCC ?? "-"}</td>
                         <td className="p-3 text-center">{sv.diemGK ?? "-"}</td>
                         <td className="p-3 text-center">{sv.diemCK ?? "-"}</td>
                         <td className="p-3 text-center">{sv.diem ?? "-"}</td>
-                        <td className="p-3">
+                        {/* <td className="p-3">
                           {sv.isDuyet === true
                             ? " Đã duyệt"
                             : sv.isDuyet === false
                             ? " Bị từ chối"
                             : "Chờ duyệt"}
-                        </td>
+                        </td> */}
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                {isBangDiemTuChoi && (
+                 {/* Trạng thái bảng điểm */}
+                {sinhViens.length > 0 && (
+                  <div className="mt-4 text-right font-medium">
+                    Trạng thái bảng điểm:{" "}
+                    <span
+                      className={`${
+                        trangThaiBangDiem === null
+                          ? "text-yellow-500"
+                          : trangThaiBangDiem === true
+                          ? "text-green-600"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {trangThaiBangDiem === null
+                        ? "Chờ duyệt"
+                        : trangThaiBangDiem === true
+                        ? "Đã duyệt"
+                        : "Bị từ chối"}
+                    </span>
+                  </div>
+                )}
+                {trangThaiBangDiem === false && (
                   <div className="mt-5 text-right">
                     <button
                       onClick={onNhapLai}

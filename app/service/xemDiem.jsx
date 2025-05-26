@@ -62,11 +62,9 @@ export const fetchDiemBySinhVienId = async (idSinhVien) => {
           },
         }
       );
-  
       if (!res.ok) {
         throw new Error("Không thể lấy dữ liệu điểm");
       }
-  
       const data = await res.json();
       return data?.value || [];
     } catch (error) {
@@ -74,28 +72,6 @@ export const fetchDiemBySinhVienId = async (idSinhVien) => {
       throw error;
     }
   };
- // Lấy giảng viên từ bảng Users dựa vào user_id
-export async function fetchUserById(userId) {
-    try {
-      if (!userId) throw new Error("User ID không hợp lệ");
-  
-      const res = await fetch(`${API_BASE}/Users?$filter=id eq ${userId}`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      });
-  
-      if (!res.ok) throw new Error("Không thể lấy thông tin user");
-  
-      const data = await res.json();
-      return data.value?.[0]; // Trả về 1 user duy nhất
-    } catch (error) {
-      console.error("Lỗi khi lấy user theo ID:", error);
-      throw error;
-    }
-  }
-
-  
   // Lấy danh sách chức năng
   export const fetchChucNangs = async (setChucNangs) => {
     try {
