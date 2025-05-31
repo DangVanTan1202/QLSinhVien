@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
@@ -17,6 +16,7 @@ export default function NopDiemUI({
 }) {
   const [selectedMonHoc, setSelectedMonHoc] = useState("");
   const [selectedLop, setSelectedLop] = useState("");
+  const [fileName, setFileName] = useState("");
   const [dsDiem, setDsDiem] = useState([]);
 
   const handleSelectMonHoc = (e) => {
@@ -62,6 +62,7 @@ export default function NopDiemUI({
     else if (heSo === "5-5") [wCC, wGK, wCK] = [0.1, 0.4, 0.5];
     return parseFloat((diemCC * wCC + diemGK * wGK + diemCK * wCK).toFixed(2));
   };
+
   return (
     <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
@@ -93,7 +94,9 @@ export default function NopDiemUI({
                   Danh sách sinh viên lớp{" "}
                   {monHocs.find((m) => m.id == selectedMonHoc)?.LopHoc?.tenLop}
                 </h3>
-                <div className="mb-4">
+                <div className="flex justify-between items-start gap-6 mb-6">
+                  {/* Hệ số tính điểm */}
+                  <div>
                   <label className="mr-2 font-medium">Hệ số tính điểm:</label>
                   <select
                     className="p-2 border border-gray-700 rounded-md bg-white text-gray-700"
@@ -105,19 +108,32 @@ export default function NopDiemUI({
                     <option value="5-5">Hệ 5/5</option>
                   </select>
                 </div>
-                <div className="mb-4">
-                  <label className="mr-2 font-medium">Import từ Excel:</label>
+                  {/* Import từ Excel */}
+                <div>
+
+                  <div className="flex items-center gap-4">
+                    <label
+                      htmlFor="excel-upload"
+                      className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition font-medium"
+                    >
+                      Chọn file Excel
+                    </label>
+                    <span className="text-sm text-gray-600 italic">
+                      {fileName || "Chưa chọn file nào"}
+                    </span>
+                  </div>
+
                   <input
+                    id="excel-upload"
                     type="file"
                     accept=".xlsx, .xls"
+                    className="hidden"
                     onChange={async (e) => {
                       const file = e.target.files[0];
                       if (!file) return;
-
+                      setFileName(file.name); // hiển thị tên file
                       try {
                         const excelData = await importExcel(file);
-
-                        // Ghép dữ liệu điểm từ file vào dsDiem
                         const matched = sinhViens
                           .map((sv) => {
                             const row = excelData.find(
@@ -143,8 +159,7 @@ export default function NopDiemUI({
                               diem,
                             };
                           })
-                          .filter(Boolean); // loại bỏ null nếu không match
-
+                          .filter(Boolean);
                         setDsDiem(matched);
                       } catch (err) {
                         console.error("Lỗi đọc file Excel:", err);
@@ -154,6 +169,7 @@ export default function NopDiemUI({
                       }
                     }}
                   />
+                </div>
                 </div>
                 <table className="w-full text-left border border-gray-300">
                   <thead>
