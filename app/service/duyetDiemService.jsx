@@ -56,6 +56,21 @@ export const fetchSinhViensByLop = async (idLopHoc) => {
       return []; // Nếu có lỗi, trả về mảng rỗng
     }
   };
+  // Lấy giảng viên theo user_id
+  export const fetchGiangVienByUserId = async (userId) => {
+    try {
+      const res = await fetch(`${API_BASE}/GiangViens?$filter=user_id eq ${userId}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      const data = await res.json();
+      return data.value?.[0] || null;
+    } catch (error) {
+      console.error("Lỗi khi fetch GiangVien:", error);
+      return null;
+    }
+  };
 //  Lấy điểm số của sinh viên theo môn học và lớp học
 export const getDiemTheoLopVaMon = async (idLopHoc, idMonHoc) => {
     try {

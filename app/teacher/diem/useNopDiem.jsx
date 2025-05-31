@@ -8,6 +8,7 @@ import {
   submitDiem,
   fetchChucNangs,
   fetchPhanQuyenByLoaiTK,
+  fetchGiangVienByUserId,
 } from "../../service/nopDiemService";
 
 export const useNopDiem = () => {
@@ -19,22 +20,12 @@ export const useNopDiem = () => {
     Xem: false,
     Nop: false,
   });
-
   const router = useRouter();
-
-  const getToken = () => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("token");
-    }
-    return null;
-  };
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     router.push("/login");
   };
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
@@ -50,23 +41,16 @@ export const useNopDiem = () => {
 
     const loadData = async () => {
       if (parsedUser.LoaiTK_Code === "GV") {
-        const res = await fetch(
-          `http://guyqn123-001-site1.ptempurl.com/api/odata/GiangViens?$filter=user_id eq ${parsedUser.Id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${getToken()}`,
-            },
-          }
-        );
-        const data = await res.json();
-        if (data.value?.length > 0) {
-          parsedUser.GiangVien = data.value[0];
+        const giangVien = await fetchGiangVienByUserId(parsedUser.Id);
+        if (giangVien) {
+          parsedUser.GiangVien = giangVien;
           localStorage.setItem("user", JSON.stringify(parsedUser));
         }
       }
-
       setUser(parsedUser);
-      const monHocData = await fetchMonHocsByGiangVien(parsedUser.GiangVien?.id);
+      const monHocData = await fetchMonHocsByGiangVien(
+        parsedUser.GiangVien?.id
+      );
       setMonHocs(monHocData);
 
       const quyenData = await new Promise((resolve) =>
@@ -142,7 +126,9 @@ export const useNopDiem = () => {
 
     if (errorMessages.length > 0) {
       alert(
-        `Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join("\n")}`
+        `Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join(
+          "\n"
+        )}`
       );
     }
   };
@@ -156,6 +142,6 @@ export const useNopDiem = () => {
     handleLopChange,
     handleSubmit,
     heSo,
-    setHeSo
+    setHeSo,
   };
 };

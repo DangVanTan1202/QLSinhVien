@@ -7,6 +7,21 @@ const getToken = () => {
   }
   return null;
 };
+// Lấy giảng viên theo user_id
+export const fetchGiangVienByUserId = async (userId) => {
+  try {
+    const res = await fetch(`${API_BASE}/GiangViens?$filter=user_id eq ${userId}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    const data = await res.json();
+    return data.value?.[0] || null;
+  } catch (error) {
+    console.error("Lỗi khi fetch GiangVien:", error);
+    return null;
+  }
+};
 // Lấy danh sách môn học theo giảng viên hiện tại
 export const fetchMonHocsByGiangVien = async (idGiangVien) => {
     try {

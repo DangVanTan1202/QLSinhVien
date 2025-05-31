@@ -7,6 +7,7 @@ import {
   fetchSinhViensByLop,
   getDiemTheoLopVaMon,
   xoaBangDiem,
+  fetchGiangVienByUserId,
 } from "../../service/duyetDiemService";
 export default function useThongBaoLogic() {
   const [user, setUser] = useState(null);
@@ -15,22 +16,12 @@ export default function useThongBaoLogic() {
   const [diemList, setDiemList] = useState([]);
   const [selectedMonHoc, setSelectedMonHoc] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const router = useRouter();
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     router.push("/login");
   };
-
-  const getToken = () => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("token");
-    }
-    return null;
-  };
-
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (!storedUser) {
@@ -48,21 +39,13 @@ export default function useThongBaoLogic() {
       try {
         setLoading(true);
 
-        if (parsedUser.LoaiTK_Code === "GV") {
-          const res = await fetch(
-            `http://guyqn123-001-site1.ptempurl.com/api/odata/GiangViens?$filter=user_id eq ${parsedUser.Id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${getToken()}`,
-              },
-            }
-          );
-          const data = await res.json();
-          if (data.value && data.value.length > 0) {
-            parsedUser.GiangVien = data.value[0];
-            localStorage.setItem("user", JSON.stringify(parsedUser));
-          }
-        }
+       if (parsedUser.LoaiTK_Code === "GV") {
+               const giangVien = await fetchGiangVienByUserId(parsedUser.Id);
+               if (giangVien) {
+                 parsedUser.GiangVien = giangVien;
+                 localStorage.setItem("user", JSON.stringify(parsedUser));
+               }
+             }
 
         setUser(parsedUser);
 
