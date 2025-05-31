@@ -24,13 +24,11 @@ export function useXemDiem() {
       router.push("/login");
       return;
     }
-
     const parsedUser = JSON.parse(storedUser);
     if (!["SV", "Admin"].includes(parsedUser.LoaiTK_Code)) {
       router.push("/login");
       return;
     }
-
     setUser(parsedUser);
 
     const loadPermissionsAndData = async () => {

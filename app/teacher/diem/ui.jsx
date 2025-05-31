@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-
+import { importExcel } from "../../../components/importExcel";
 export default function NopDiemUI({
   user,
   handleLogout,
@@ -12,6 +12,8 @@ export default function NopDiemUI({
   permissions,
   onLopChange,
   onSubmit,
+  heSo,
+  setHeSo,
 }) {
   const [selectedMonHoc, setSelectedMonHoc] = useState("");
   const [selectedLop, setSelectedLop] = useState("");
@@ -52,11 +54,14 @@ export default function NopDiemUI({
       }
     });
   };
-
   const calculateDiem = ({ diemCC = 0, diemGK = 0, diemCK = 0 }) => {
-    return parseFloat((diemCC * 0.1 + diemGK * 0.3 + diemCK * 0.6).toFixed(2));
+    let wCC = 0.1,
+      wGK = 0.3,
+      wCK = 0.6;
+    if (heSo === "7-3") [wCC, wGK, wCK] = [0.1, 0.2, 0.7];
+    else if (heSo === "5-5") [wCC, wGK, wCK] = [0.1, 0.4, 0.5];
+    return parseFloat((diemCC * wCC + diemGK * wGK + diemCK * wCK).toFixed(2));
   };
-
   return (
     <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
@@ -81,17 +86,80 @@ export default function NopDiemUI({
                 ))}
               </select>
             </div>
+
             {selectedLop && (
               <div className="bg-white p-6 rounded-xl shadow-lg border border-purple-200">
                 <h3 className="text-xl font-semibold mb-4">
                   Danh sách sinh viên lớp{" "}
                   {monHocs.find((m) => m.id == selectedMonHoc)?.LopHoc?.tenLop}
                 </h3>
-                <table className="w-full text-left border border-gray-200">
+                <div className="mb-4">
+                  <label className="mr-2 font-medium">Hệ số tính điểm:</label>
+                  <select
+                    className="p-2 border border-gray-700 rounded-md bg-white text-gray-700"
+                    value={heSo}
+                    onChange={(e) => setHeSo(e.target.value)}
+                  >
+                    <option value="6-4">Hệ 6/4</option>
+                    <option value="7-3">Hệ 7/3</option>
+                    <option value="5-5">Hệ 5/5</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="mr-2 font-medium">Import từ Excel:</label>
+                  <input
+                    type="file"
+                    accept=".xlsx, .xls"
+                    onChange={async (e) => {
+                      const file = e.target.files[0];
+                      if (!file) return;
+
+                      try {
+                        const excelData = await importExcel(file);
+
+                        // Ghép dữ liệu điểm từ file vào dsDiem
+                        const matched = sinhViens
+                          .map((sv) => {
+                            const row = excelData.find(
+                              (r) => r.maSinhVien === sv.maSinhVien.trim()
+                            );
+                            if (!row) return null;
+                            const diemCC = row.diemCC || 0;
+                            const diemGK = row.diemGK || 0;
+                            const diemCK = row.diemCK || 0;
+                            const diem = calculateDiem({
+                              diemCC,
+                              diemGK,
+                              diemCK,
+                            });
+
+                            return {
+                              idSinhVien: sv.id,
+                              idMonHoc: Number(selectedMonHoc),
+                              idGiangVien: user?.GiangVien?.id || 0,
+                              diemCC,
+                              diemGK,
+                              diemCK,
+                              diem,
+                            };
+                          })
+                          .filter(Boolean); // loại bỏ null nếu không match
+
+                        setDsDiem(matched);
+                      } catch (err) {
+                        console.error("Lỗi đọc file Excel:", err);
+                        alert(
+                          "Không thể đọc file Excel. Vui lòng kiểm tra định dạng."
+                        );
+                      }
+                    }}
+                  />
+                </div>
+                <table className="w-full text-left border border-gray-300">
                   <thead>
                     <tr className="bg-pink-200 text-stone-700">
-                      <th className="p-3">Họ tên</th>
                       <th className="p-3">Mã SV</th>
+                      <th className="p-3">Họ Tên</th>
                       <th className="p-3">Điểm Chuyên Cần</th>
                       <th className="p-3">Điểm Giữa Kỳ</th>
                       <th className="p-3">Điểm Cuối kỳ</th>
@@ -103,8 +171,8 @@ export default function NopDiemUI({
                       const svDiem = dsDiem.find((d) => d.idSinhVien === sv.id);
                       return (
                         <tr key={sv.id} className="hover:bg-green-100">
-                          <td className="p-3">{sv.hoTen}</td>
                           <td className="p-3">{sv.maSinhVien}</td>
+                          <td className="p-3">{sv.hoTen}</td>
 
                           {["diemCC", "diemGK", "diemCK"].map((type) => (
                             <td className="p-2" key={type}>
@@ -113,7 +181,7 @@ export default function NopDiemUI({
                                 step="0.01"
                                 min={0}
                                 max={10}
-                                className="w-20 px-2 py-1 text-sm rounded-md border-2 border-orange-400 focus:outline-none focus:ring-0 focus:border-orange-400"
+                                className="w-20 px-2 py-1 text-sm rounded-md border-2 border-orange-500 focus:outline-none focus:ring-0 focus:border-orange-500"
                                 value={svDiem?.[type] ?? ""}
                                 onChange={(e) => {
                                   let raw = e.target.value;

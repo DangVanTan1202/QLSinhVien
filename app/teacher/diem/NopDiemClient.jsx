@@ -9,6 +9,8 @@ export default function NopDiemClient() {
     monHocs,
     sinhViens,
     permissions,
+    heSo,             
+    setHeSo,          
     handleLogout,
     handleLopChange,
     handleSubmit,
@@ -21,6 +23,8 @@ export default function NopDiemClient() {
       monHocs={monHocs}
       sinhViens={sinhViens}
       permissions={permissions}
+      heSo={heSo}            
+      setHeSo={setHeSo}       
       onLopChange={handleLopChange}
       onSubmit={handleSubmit}
     />

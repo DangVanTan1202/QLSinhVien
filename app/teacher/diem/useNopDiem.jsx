@@ -14,6 +14,7 @@ export const useNopDiem = () => {
   const [user, setUser] = useState(null);
   const [monHocs, setMonHocs] = useState([]);
   const [sinhViens, setSinhViens] = useState([]);
+  const [heSo, setHeSo] = useState("6-4");
   const [permissions, setPermissions] = useState({
     Xem: false,
     Nop: false,
@@ -65,7 +66,7 @@ export const useNopDiem = () => {
       }
 
       setUser(parsedUser);
-      const monHocData = await fetchMonHocsByGiangVien(parsedUser.GiangVien?.id);// lấy giảng viên thuoc mon hoc do
+      const monHocData = await fetchMonHocsByGiangVien(parsedUser.GiangVien?.id);
       setMonHocs(monHocData);
 
       const quyenData = await new Promise((resolve) =>
@@ -77,7 +78,7 @@ export const useNopDiem = () => {
       const chucNangNopDiem = chucNangData.find((c) => c.code === "QLDS");
       const quyenNopDiem = quyenData.find(
         (q) => q.IdChucNang === chucNangNopDiem?.id
-      )
+      );
       setPermissions({
         Xem: quyenNopDiem?.Xem,
         Nop: quyenNopDiem?.Nop,
@@ -92,23 +93,40 @@ export const useNopDiem = () => {
     setSinhViens(data);
   };
 
+  const tinhDiemTrungBinh = (diemCC, diemGK, diemCK) => {
+    const cc = parseFloat(diemCC) || 0;
+    const gk = parseFloat(diemGK) || 0;
+    const ck = parseFloat(diemCK) || 0;
+
+    switch (heSo) {
+      case "6-4":
+        return +(cc * 0.1 + gk * 0.3 + ck * 0.6).toFixed(2);
+      case "7-3":
+        return +(cc * 0.2 + gk * 0.5 + ck * 0.3).toFixed(2);
+      case "5-5":
+        return +(cc * 0.2 + gk * 0.3 + ck * 0.5).toFixed(2);
+      default:
+        return +(cc * 0.1 + gk * 0.3 + ck * 0.6).toFihxed(2);
+    }
+  };
+
   const handleSubmit = async (dsDiem) => {
     let successCount = 0;
     let errorMessages = [];
-  
+
     for (const d of dsDiem) {
       const diemCC = parseFloat(d.diemCC) || 0;
       const diemGK = parseFloat(d.diemGK) || 0;
       const diemCK = parseFloat(d.diemCK) || 0;
-      const diem = diemCC * 0.1 + diemGK * 0.3 + diemCK * 0.6;
-  
+      const diem = tinhDiemTrungBinh(diemCC, diemGK, diemCK);
+
       try {
         await submitDiem({
           ...d,
           diemCC,
           diemGK,
           diemCK,
-          diem: parseFloat(diem.toFixed(2)),
+          diem,
         });
         successCount++;
       } catch (error) {
@@ -117,20 +135,18 @@ export const useNopDiem = () => {
         errorMessages.push(`mã sinh viên ${maSinhVien}: ${error.message}`);
       }
     }
-  
+
     if (successCount > 0) {
       alert(`Đã nộp điểm cho ${successCount} sinh viên.`);
     }
-  
+
     if (errorMessages.length > 0) {
       alert(
-        ` Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join(
-          "\n"
-        )}`
+        `Một số sinh viên đã có điểm và không được ghi lại:\n\n${errorMessages.join("\n")}`
       );
     }
   };
-  
+
   return {
     user,
     monHocs,
@@ -139,5 +155,7 @@ export const useNopDiem = () => {
     handleLogout,
     handleLopChange,
     handleSubmit,
+    heSo,
+    setHeSo
   };
 };
