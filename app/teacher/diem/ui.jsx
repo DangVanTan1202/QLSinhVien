@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react"; 
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
@@ -62,7 +63,15 @@ export default function NopDiemUI({
     else if (heSo === "5-5") [wCC, wGK, wCK] = [0.1, 0.4, 0.5];
     return parseFloat((diemCC * wCC + diemGK * wGK + diemCK * wCK).toFixed(2));
   };
-
+  // cập nhật lại điểm trung bình khi thay đổi hệ số 
+useEffect(() => {
+  setDsDiem((prev) =>
+    prev.map((d) => ({
+      ...d,
+      diem: calculateDiem(d),
+    }))
+  );
+}, [heSo]);
   return (
     <div className="flex min-h-screen bg-neutral-200 text-gray-900 font-sans">
       <Sidebar user={user} />
@@ -82,7 +91,7 @@ export default function NopDiemUI({
                 <option value="">-- Chọn môn học --</option>
                 {monHocs.map((mh) => (
                   <option key={mh.id} value={mh.id}>
-                    {mh.maMonHoc} - {mh.tenMonHoc} ({mh.LopHoc?.tenLop})
+                   môn: {mh.maMonHoc} - {mh.tenMonHoc} lớp:({mh.LopHoc?.tenLop})
                   </option>
                 ))}
               </select>

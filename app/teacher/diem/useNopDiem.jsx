@@ -90,7 +90,7 @@ export const useNopDiem = () => {
       case "5-5":
         return +(cc * 0.2 + gk * 0.3 + ck * 0.5).toFixed(2);
       default:
-        return +(cc * 0.1 + gk * 0.3 + ck * 0.6).toFihxed(2);
+        return +(cc * 0.1 + gk * 0.3 + ck * 0.6).toFixed(2);
     }
   };
 

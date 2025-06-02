@@ -31,26 +31,10 @@ export default function Header({ user, onLogout }) {
         <Button
           variant="ghost"
           className="flex items-center gap-2 text-white"
-          onClick={() => router.push("/tuyen-sinh")}
-        >
-          <Baby />
-          <span>Tuyển sinh</span>
-        </Button>
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2 text-white"
-          onClick={() => router.push("/lien-ket-doi-tac")}
-        >
-          <Blend />
-          <span>Liên kết đối tác</span>
-        </Button>
-        <Button
-          variant="ghost"
-          className="flex items-center gap-2 text-white"
-          onClick={() => router.push("/thong-bao")}
+          onClick={() => router.push("/lienHe")}
         >
           <Bell />
-          <span>Thông báo</span>
+          <span>Liên hệ</span>
         </Button>
         <Button
           variant="ghost"

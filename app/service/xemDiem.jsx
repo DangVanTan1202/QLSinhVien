@@ -19,7 +19,33 @@ export const fetchUsersClient = async (setUsers) => {
     console.error("Lỗi fetch tài khoản:", error);
   }
 };
+//  lấy GPA và xếp loại sinh viên
+export const fetchXepLoaiBySinhVienId = async (idSinhVien) => {
+  try {
+    if (!idSinhVien) {
+      throw new Error("idSinhVien không hợp lệ!");
+    }
 
+    const res = await fetch(
+      `http://guyqn123-001-site1.ptempurl.com/TinhDiem/TinhDiemvaXepLoai/${idSinhVien}`,
+      {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Không thể lấy thông tin xếp loại");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Lỗi khi lấy GPA và xếp loại:", error);
+    return null;
+  }
+};
 export const fetchSinhVienByUserId = async (userId) => {
   try {
     if (!userId) {

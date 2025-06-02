@@ -7,10 +7,12 @@ import {
   fetchPhanQuyenByLoaiTK,
   fetchChucNangs,
   fetchSinhVienByUserId,
+   fetchXepLoaiBySinhVienId,
 } from "../../service/xemDiem";
 export function useXemDiem() {
   const [user, setUser] = useState(null);
   const [diemData, setDiemData] = useState([]);
+   const [xepLoai, setXepLoai] = useState(null);
   const [permissions, setPermissions] = useState({ Xem: false });
   const router = useRouter();
   const handleLogout = () => {
@@ -47,34 +49,46 @@ export function useXemDiem() {
         setPermissions({ Xem: hasXem });
 
         if (hasXem) {
-          const userId = parsedUser?.id || parsedUser?.user_id || parsedUser?.Id;
+          const userId =
+            parsedUser?.id || parsedUser?.user_id || parsedUser?.Id;
           if (!userId) throw new Error("Không tìm thấy ID người dùng hợp lệ.");
 
           const sinhVien = await fetchSinhVienByUserId(userId);
           const rawData = await fetchDiemBySinhVienId(sinhVien.id);
+          const xepLoaiData = await fetchXepLoaiBySinhVienId(sinhVien.id);
+          setXepLoai(xepLoaiData);
           function convertDiemHe10(diem10) {
-            if (diem10 === null || isNaN(diem10)) return { diem4: "N/A", diemChu: "N/A", ketQua: "Không đạt" };
+            if (diem10 === null || isNaN(diem10))
+              return { diem4: "N/A", diemChu: "N/A", ketQua: "Không đạt" };
             let diem4 = 0;
             let diemChu = "F";
             let ketQua = "Không đạt";
-            if (diem10 >= 8.5) {
+            if (diem10 >= 9.0 && diem10 <= 10.0) {
               diem4 = 4.0;
+              diemChu = "A+";
+              ketQua = "Đạt";
+            } else if (diem10 >= 8.0) {
+              diem4 = 3.5;
               diemChu = "A";
               ketQua = "Đạt";
             } else if (diem10 >= 7.0) {
               diem4 = 3.0;
+              diemChu = "B+";
+              ketQua = "Đạt";
+            } else if (diem10 >= 6.0) {
+              diem4 = 2.5;
               diemChu = "B";
               ketQua = "Đạt";
-            } else if (diem10 >= 5.5) {
+              } else if (diem10 >= 5.0) {
               diem4 = 2.0;
               diemChu = "C";
               ketQua = "Đạt";
             } else if (diem10 >= 4.0) {
-              diem4 = 1.0;
+              diem4 = 1.5;
               diemChu = "D";
               ketQua = "Đạt";
             } else {
-              diem4 = 0;
+              diem4 = 0.0;
               diemChu = "F";
               ketQua = "Không đạt";
             }
@@ -83,16 +97,16 @@ export function useXemDiem() {
               diemChu,
               ketQua,
             };
-          }          
+          }
           const mappedData = await Promise.all(
             rawData.map(async (item) => {
               const diemCC = item.diemCC ?? null;
               const diemGK = item.diemGK ?? null;
               const diemCK = item.diemCK ?? null;
               const diem = item.diem ?? null;
-          
+
               const { diem4, diemChu, ketQua } = convertDiemHe10(diem);
-          
+
               return {
                 maMonHoc: item.MonHoc?.maMonHoc || "N/A",
                 tenMonHoc: item.MonHoc?.tenMonHoc || "N/A",
@@ -106,7 +120,7 @@ export function useXemDiem() {
               };
             })
           );
-          
+
           setDiemData(mappedData);
         }
       } catch (error) {
@@ -120,5 +134,6 @@ export function useXemDiem() {
     diemData,
     permissions,
     handleLogout,
+    xepLoai, 
   };
 }

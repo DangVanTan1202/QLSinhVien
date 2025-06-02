@@ -4,6 +4,7 @@ import { Mail, Phone, Facebook, Youtube } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-black text-white py-10 px-6">
+      
       <div className="container mx-auto">
         {/* Phần trên cùng với tiêu đề và nút hỗ trợ */}
         <div className="flex flex-col md:flex-row justify-between items-center pb-6 border-b border-gray-600">
@@ -15,7 +16,6 @@ const Footer = () => {
             Hỗ trợ
           </button>
         </div>
-
         {/* Phần dưới chứa logo, danh mục, liên hệ, mạng xã hội */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
               {/* Logo và mô tả */}

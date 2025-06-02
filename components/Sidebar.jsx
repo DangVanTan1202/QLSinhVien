@@ -14,7 +14,7 @@ export default function Sidebar({ user }) {
   const getMenuItems = () => {
     let items = [
       { name: "Trang chủ", icon: <Home />, path: "/home" },
-      { name: "Hướng dẫn sử dụng", icon: <Book />, path: "/guide" },
+      { name: "Liên hệ", icon: <Book />, path: "/lienHe" },
     ];
     if (!user || !user.LoaiTK_Name) return items;
     switch (user.LoaiTK_Name.toLowerCase()) {

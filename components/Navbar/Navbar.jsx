@@ -11,7 +11,7 @@ const Menu = [
   {
     id: 2,
     name: "liên hệ",
-    link: "/#about",
+    link: "/lienHe",
   },
 ];
 const Navbar = () => {

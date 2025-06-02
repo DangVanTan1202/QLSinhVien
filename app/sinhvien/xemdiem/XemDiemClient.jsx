@@ -9,13 +9,14 @@ export default function XemDiemClient() {
     diemData,
     permissions,
     handleLogout,
+    xepLoai,
   } = useXemDiem();
-
   return (
     <XemDiemUI
       user={user}
       handleLogout={handleLogout}
       data={diemData}
+      xepLoai={xepLoai} 
       permissions={permissions}
     />
   );
