@@ -11,7 +11,6 @@ export default function Client() {
     handleLogout,
     MatKhauCu,
     MatKhauMoi,
-  
     confirmPassword,
     showOld,
     showNew,

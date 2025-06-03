@@ -12,7 +12,7 @@ const Banner = () => {
       <div
         className="w-full"
         style={{
-          backgroundImage: `url('/qlsv4.png')`, // dùng path ảnh trong public
+          backgroundImage: `url('/qlsv4.png')`,
           backgroundColor: '#270c03',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',   // Không lặp lại
@@ -25,7 +25,7 @@ const Banner = () => {
               {/* Image section */}
               <div className="flex justify-center md:w-1/2" data-aos="zoom-in">
                 <Image
-                  src="/qlsv3.png" // dùng ảnh từ public
+                  src="/qlsv3.png"
                   alt="biryani img"
                   width={430}
                   height={430}

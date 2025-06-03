@@ -53,16 +53,16 @@ export function useRoleLogic() {
   }, []);
 
   useEffect(() => {
-    if (selectedLoaiTK) {
+    if (selectedLoaiTK) { 
       fetchPhanQuyenLoaiTK(selectedLoaiTK, setPhanQuyenList);
     } else {
-      setPhanQuyenList([]);
+      setPhanQuyenList([]);// chọn loại tài khoản nào, thì phanQuyenList sẽ được đặt lại thành [] (rỗng).
     }
   }, [selectedLoaiTK]);
 
   const handlePermissionChange = async ({ chucNangId, permission, value }) => {//nhận đầu vào từ ui
     const loaiTKId = parseInt(selectedLoaiTK);
-    const existing = phanQuyenList.find( // kiểm tra phân quyền này đã tồn tại chưa
+    const existing = phanQuyenList.find( // Tìm trong danh sách phân quyền (phanQuyenList) xem đã có quyền cho chức năng đó và loại tài khoản đó chưa.
       (pq) => pq.IdChucNang === chucNangId && pq.IdLoaiTK === loaiTKId
     );
 
@@ -70,10 +70,11 @@ export function useRoleLogic() {
       await deletePhanQuyen(existing.Id);
     } else {
       const updatedQuyen = {
-        Id: existing?.Id,
+        Id: existing?.Id,//// nếu tồn tại thì là update, không thì là thêm mới
         IdChucNang: chucNangId,
         IdLoaiTK: loaiTKId,
         Them: existing?.Them ?? false,
+        //Các giá trị được gán từ existing nếu có (đã từng phân quyền), nếu không thì mặc định là false.
         Sua: existing?.Sua ?? false,
         Xoa: existing?.Xoa ?? false,
         Duyet: existing?.Duyet ?? false,
@@ -81,7 +82,7 @@ export function useRoleLogic() {
         TuChoi: existing?.TuChoi ?? false,
         Nop: existing?.Nop ?? false,
       };
-      updatedQuyen[permission] = value;
+      updatedQuyen[permission] = value;//Gán quyền đang được thay đổi (permission) sang true hoặc false tùy theo người dùng vừa click checkbox nào.
 
       await updatePhanQuyen(updatedQuyen);
     }

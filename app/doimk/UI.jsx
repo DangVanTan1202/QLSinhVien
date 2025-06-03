@@ -37,14 +37,16 @@ export default function ChangePasswordUI({
             </label>
             <input
               type={showOld ? "text" : "password"}
+              //Khi người dùng click vào biểu tượng con mắt (<Eye /> hoặc <EyeOff />), 
+              // setShowOld(!showOld) được gọi, đảo ngược giá trị của showOld.
               value={MatKhauCu}
-              onChange={(e) => setOldPassword(e.target.value)}
+              onChange={(e) => setOldPassword(e.target.value)}//cập nhật giá trị vào biến mật khẩu cũ
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 transition-all"
               required
             />
             <div
               className="absolute right-3 top-9 cursor-pointer text-gray-500 hover:text-pink-500"
-              onClick={() => setShowOld(!showOld)}
+              onClick={() => setShowOld(!showOld)}//khi click vào đảo ngược giá trị thành true or false
             >
               {showOld ? <EyeOff size={20} /> : <Eye size={20} />}
             </div>

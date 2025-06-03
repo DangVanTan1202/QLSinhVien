@@ -39,7 +39,6 @@ const Services = () => {
           <div className="text-center mb-20">
             <h1 className="text-4xl font-bold text-orange-500">Các thành phần trong trang web</h1>
           </div>
-
           {/* Services Card section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
              {/* Lặp qua từng phần tử trong ServicesData để hiển thị thẻ */}

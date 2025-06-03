@@ -49,7 +49,7 @@ const ContactPage = () => {
 
         {/* Mạng xã hội */}
         <div className="flex justify-left gap-10 mb-14">
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/https.192.168.4.1.00000000000000000000000000000000" target="_blank" rel="noopener noreferrer">
             <FaFacebook className="text-blue-600 hover:text-blue-800 text-4xl hover:scale-110 transition-transform" />
           </a>
           <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
